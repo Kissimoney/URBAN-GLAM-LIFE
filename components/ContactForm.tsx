@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { supabase } from '../utils/supabaseClient';
+import { sendContactEmail } from '../utils/emailService';
 
 const ContactForm: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -68,6 +69,15 @@ const ContactForm: React.FC = () => {
         ]);
 
       if (error) throw error;
+
+      // Send Email Notification
+      await sendContactEmail({
+        user_name: formData.name,
+        user_email: formData.email,
+        engagement_type: formData.engagementType,
+        message: formData.message,
+        to_email: 'hello@urbanglam.life' // Admin email (or configured in template)
+      }).catch(err => console.error('Email notification failed:', err));
 
       setStatus({ type: 'success', message: 'Inquiry Transmitted Successfully' });
       // Clear form on success

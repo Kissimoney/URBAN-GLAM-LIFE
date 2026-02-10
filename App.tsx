@@ -2,6 +2,7 @@
 import React from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import SEO from './components/SEO';
+import ChatWidget from './components/ChatWidget';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -106,6 +107,7 @@ const App: React.FC = () => {
             <ScrollProgress />
             <CustomCursor />
             <BackToTop />
+            <ChatWidget />
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/events" element={<EventsListPage />} />

@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../utils/supabaseClient';
+import { sendVIPEmail } from '../utils/emailService';
 import { useAuth } from '../context/AuthContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -86,6 +87,15 @@ const EventsPage: React.FC = () => {
                 ]);
 
             if (error) throw error;
+
+            // Send VIP Email Notification
+            await sendVIPEmail({
+                user_name: rsvpName,
+                user_email: rsvpEmail,
+                event_title: selectedEvent.title,
+                event_date: new Date(selectedEvent.date).toLocaleDateString(),
+                status: 'pending'
+            }).catch(err => console.error('Email notification failed:', err));
 
             setRsvpStatus('success');
             setTimeout(() => {

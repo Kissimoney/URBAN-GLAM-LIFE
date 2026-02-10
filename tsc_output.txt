@@ -1,0 +1,7 @@
+components/Newsletter.tsx(3,10): error TS2305: Module '"../utils/emailService"' has no exported member 'sendVIPSignup'.
+components/Newsletter.tsx(3,25): error TS2305: Module '"../utils/emailService"' has no exported member 'isValidEmail'.
+components/VIPAccess.tsx(3,10): error TS2305: Module '"../utils/emailService"' has no exported member 'sendVIPSignup'.
+components/VIPAccess.tsx(3,25): error TS2305: Module '"../utils/emailService"' has no exported member 'isValidEmail'.
+hooks/useScrollReveal.tsx(98,15): error TS2503: Cannot find namespace 'React'.
+hooks/useScrollReveal.tsx(106,28): error TS2503: Cannot find namespace 'React'.
+utils/helpers.ts(26,9): error TS2322: Type 'Timeout' is not assignable to type 'number'.

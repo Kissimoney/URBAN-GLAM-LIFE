@@ -49,14 +49,14 @@ const VIPAccess: React.FC = () => {
       console.error('Error saving to database:', err);
     }
 
-    const result = await sendVIPSignup(email);
+    const result = await sendVIPSignup({ user_email: email, source: 'vip_access' });
     setIsSubmitting(false);
 
-    if (result.success) {
-      setStatus({ type: 'success', message: result.message });
-      setEmail(''); // Clear form on success
+    if (result && result.status === 200) {
+      setStatus({ type: 'success', message: 'Invitation request secured. Check your inbox.' });
+      setEmail('');
     } else {
-      setStatus({ type: 'error', message: result.message });
+      setStatus({ type: 'error', message: 'Submission failed. Please try again.' });
     }
   };
 

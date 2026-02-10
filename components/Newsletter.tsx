@@ -60,10 +60,16 @@ const Newsletter: React.FC = () => {
         }
 
         // Using VIP signup for now - can be customized with different template
-        const result = await sendVIPSignup(email);
+        const result = await sendVIPSignup({
+            user_email: email,
+            source: 'newsletter',
+            preferences_fashion: preferences.fashion,
+            preferences_travel: preferences.travel,
+            preferences_lifestyle: preferences.lifestyle
+        });
         setIsSubmitting(false);
 
-        if (result.success) {
+        if (result && result.status === 200) {
             setStatus({
                 type: 'success',
                 message: 'Welcome to the newsletter! Check your inbox for confirmation.'
@@ -71,7 +77,7 @@ const Newsletter: React.FC = () => {
             setEmail('');
             setPreferences({ fashion: true, travel: true, lifestyle: true });
         } else {
-            setStatus({ type: 'error', message: result.message });
+            setStatus({ type: 'error', message: 'Subscription failed. Please try again.' });
         }
     };
 

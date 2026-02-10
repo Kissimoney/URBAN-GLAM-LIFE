@@ -1,0 +1,5 @@
+components/Newsletter.tsx(66,20): error TS2339: Property 'success' does not exist on type 'EmailJSResponseStatus'.
+components/Newsletter.tsx(74,56): error TS2339: Property 'message' does not exist on type 'EmailJSResponseStatus'.
+components/VIPAccess.tsx(55,16): error TS2339: Property 'success' does not exist on type 'EmailJSResponseStatus'.
+components/VIPAccess.tsx(56,52): error TS2339: Property 'message' does not exist on type 'EmailJSResponseStatus'.
+components/VIPAccess.tsx(59,50): error TS2339: Property 'message' does not exist on type 'EmailJSResponseStatus'.
