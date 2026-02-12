@@ -125,20 +125,20 @@ const EventsPage: React.FC = () => {
 
             <main className="pt-32 pb-20">
                 <div className="container mx-auto px-6">
-                    <div className="text-center mb-16">
-                        <h1 className="text-gold uppercase tracking-[0.5em] text-sm font-bold mb-4">The Social Calendar</h1>
-                        <h2 className="text-5xl md:text-7xl font-serif font-bold tracking-tighter">Exclusive Events</h2>
+                    <div className="text-center mb-16 animate-in fade-in slide-in-from-bottom-10 duration-1000">
+                        <h1 className="text-gold uppercase tracking-[0.5em] text-[10px] md:text-sm font-bold mb-4">The Social Calendar</h1>
+                        <h2 className="text-4xl md:text-7xl lg:text-8xl font-serif font-bold tracking-tighter leading-tight max-w-4xl mx-auto">Exclusive Events</h2>
                     </div>
 
                     {/* Filter */}
-                    <div className="flex justify-center gap-4 mb-16 flex-wrap">
+                    <div className="flex justify-center gap-4 mb-16 flex-wrap animate-in fade-in duration-1000 delay-300">
                         {cities.map(city => (
                             <button
                                 key={city}
                                 onClick={() => setSelectedCity(city)}
-                                className={`px-6 py-2 rounded-full border text-xs uppercase tracking-widest font-bold transition-all duration-300 ${selectedCity === city
-                                    ? 'bg-gold text-black border-gold'
-                                    : 'bg-transparent text-white/50 border-white/20 hover:border-gold hover:text-gold'
+                                className={`px-8 py-3 rounded-full border text-[10px] uppercase tracking-[0.2em] font-black transition-all duration-500 ${selectedCity === city
+                                    ? 'bg-gold text-black border-gold shadow-[0_0_20px_rgba(212,175,55,0.3)]'
+                                    : 'bg-transparent text-white/40 border-white/10 hover:border-gold/50 hover:text-gold'
                                     }`}
                             >
                                 {city}
@@ -149,40 +149,56 @@ const EventsPage: React.FC = () => {
                     {/* Events Grid */}
                     {loading ? (
                         <div className="flex justify-center py-20">
-                            <div className="w-10 h-10 border-2 border-gold border-t-transparent rounded-full animate-spin"></div>
+                            <div className="w-12 h-12 border-2 border-gold/20 border-t-gold rounded-full animate-spin"></div>
                         </div>
                     ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {filteredEvents.map(event => (
-                                <div key={event.id} className="group relative bg-neutral-900/50 border border-white/10 rounded-xl overflow-hidden hover:border-gold/50 transition-all duration-500">
-                                    <div className="aspect-[4/3] overflow-hidden">
+                        <div
+                            key={selectedCity} // Key change triggers re-animation for filter transition
+                            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 animate-in fade-in slide-in-from-bottom-5 duration-700"
+                        >
+                            {filteredEvents.map((event, index) => (
+                                <div
+                                    key={event.id}
+                                    className="group relative bg-[#0a0a0a] border border-white/5 rounded-2xl overflow-hidden hover:border-gold/30 hover:scale-[1.03] transition-all duration-700 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+                                    style={{ animationDelay: `${index * 100}ms` }}
+                                >
+                                    <div className="aspect-[4/5] overflow-hidden relative">
                                         <img
                                             src={event.image_url}
                                             alt={event.title}
-                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                                            className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 grayscale-[0.5] group-hover:grayscale-0 opacity-80 group-hover:opacity-100"
                                         />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60"></div>
+
+                                        <div className="absolute bottom-6 left-6">
+                                            <span className="bg-gold/10 backdrop-blur-md text-gold text-[9px] uppercase tracking-[0.3em] font-black border border-gold/20 px-4 py-2 rounded-full">
+                                                {event.city}
+                                            </span>
+                                        </div>
                                     </div>
 
                                     <div className="p-8">
-                                        <div className="flex justify-between items-start mb-4">
-                                            <span className="text-gold text-[10px] uppercase tracking-[0.3em] font-black border border-gold/30 px-3 py-1 rounded-full">
-                                                {event.city}
+                                        <div className="flex justify-between items-center mb-4">
+                                            <span className="text-white/30 text-[10px] uppercase tracking-widest font-bold">
+                                                {new Date(event.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}
                                             </span>
-                                            <span className="text-white/40 text-xs font-serif italic">
-                                                {new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                                            </span>
+                                            <div className="w-1 h-1 bg-gold/50 rounded-full"></div>
                                         </div>
 
-                                        <h3 className="text-2xl font-serif font-bold mb-3 group-hover:text-gold transition-colors">{event.title}</h3>
-                                        <p className="text-neutral-400 text-sm font-light mb-6 leading-relaxed line-clamp-3">
-                                            {event.description}
+                                        <h3 className="text-2xl md:text-3xl font-serif font-bold mb-4 group-hover:text-gold transition-colors duration-500 leading-tight">
+                                            {event.title}
+                                        </h3>
+                                        <p className="text-neutral-500 text-sm font-light mb-8 leading-relaxed line-clamp-2 italic">
+                                            "{event.description}"
                                         </p>
 
                                         <button
                                             onClick={() => openRSVPModal(event)}
-                                            className="w-full py-4 border border-white/10 text-white text-[10px] uppercase tracking-[0.3em] font-black hover:bg-gold hover:text-black hover:border-gold transition-all duration-500 flex items-center justify-center gap-2"
+                                            className="w-full py-5 bg-transparent border border-white/10 text-white text-[10px] uppercase tracking-[0.4em] font-black hover:bg-gold hover:text-black hover:border-gold hover:shadow-[0_0_25px_rgba(212,175,55,0.4)] transition-all duration-700 flex items-center justify-center gap-3 group/btn relative overflow-hidden"
                                         >
-                                            Request Access <ArrowRight size={14} />
+                                            <span className="relative z-10">Request Access</span>
+                                            <ArrowRight size={14} className="relative z-10 transition-transform duration-500 group-hover/btn:translate-x-1" />
+                                            <div className="absolute inset-0 w-[200%] h-full -translate-x-full group-hover/btn:translate-x-full animate-[shimmer_3s_infinite] transition-transform duration-[1200ms] ease-out bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none"></div>
                                         </button>
                                     </div>
                                 </div>

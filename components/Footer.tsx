@@ -8,58 +8,57 @@ const Footer: React.FC = () => {
   };
 
   const socialLinks = [
-    { 
-      name: 'Facebook', 
-      icon: <Facebook size={24} />, 
-      href: '#', 
-      hoverBorder: 'group-hover:border-[#D4AF37]',
+    {
+      name: 'Facebook',
+      icon: <Facebook size={24} />,
+      href: '#',
+      hoverBorder: 'group-hover:border-gold',
       hoverShadow: 'group-hover:shadow-[0_0_25px_rgba(212,175,55,0.4)]',
-      hoverText: 'group-hover:text-[#D4AF37]'
+      hoverText: 'group-hover:text-gold'
     },
-    { 
-      name: 'Instagram', 
-      icon: <Instagram size={24} />, 
-      href: '#', 
-      hoverBorder: 'group-hover:border-[#FF00FF]',
-      hoverShadow: 'group-hover:shadow-[0_0_25px_rgba(255,0,255,0.4)]',
-      hoverText: 'group-hover:text-[#FF00FF]'
+    {
+      name: 'Instagram',
+      icon: <Instagram size={24} />,
+      href: '#',
+      hoverBorder: 'group-hover:border-gold',
+      hoverShadow: 'group-hover:shadow-[0_0_25px_rgba(212,175,55,0.4)]',
+      hoverText: 'group-hover:text-gold'
     },
-    { 
-      name: 'Twitter', 
-      icon: <Twitter size={24} />, 
-      href: '#', 
-      hoverBorder: 'group-hover:border-[#1DA1F2]',
-      hoverShadow: 'group-hover:shadow-[0_0_25px_rgba(29,161,242,0.4)]',
-      hoverText: 'group-hover:text-[#1DA1F2]'
+    {
+      name: 'Twitter',
+      icon: <Twitter size={24} />,
+      href: '#',
+      hoverBorder: 'group-hover:border-gold',
+      hoverShadow: 'group-hover:shadow-[0_0_25px_rgba(212,175,55,0.4)]',
+      hoverText: 'group-hover:text-gold'
     },
-    { 
-      name: 'Youtube', 
-      icon: <Youtube size={24} />, 
-      href: '#', 
-      hoverBorder: 'group-hover:border-[#FF0000]',
-      hoverShadow: 'group-hover:shadow-[0_0_25px_rgba(255,0,0,0.4)]',
-      hoverText: 'group-hover:text-[#FF0000]'
+    {
+      name: 'Youtube',
+      icon: <Youtube size={24} />,
+      href: '#',
+      hoverBorder: 'group-hover:border-gold',
+      hoverShadow: 'group-hover:shadow-[0_0_25px_rgba(212,175,55,0.4)]',
+      hoverText: 'group-hover:text-gold'
     },
   ];
 
   return (
     <footer className="bg-black pt-24 pb-12 border-t border-white/5">
-      <div className="container mx-auto px-6 text-center">
+      <div className="container mx-auto px-6 flex flex-col items-center text-center">
         <h2 className="text-4xl md:text-5xl font-serif font-bold mb-12 tracking-tighter">
           URBAN <span className="text-gold">GLAM</span> LIFE
         </h2>
-        
-        <div className="flex flex-wrap justify-center gap-10 mb-20">
+
+        <div className="flex flex-wrap justify-center gap-6 md:gap-12 mb-20 w-full max-w-4xl">
           {socialLinks.map((social) => (
-            <a 
-              key={social.name} 
-              href={social.href} 
-              className="group flex flex-col items-center gap-4 text-neutral-500 transition-all duration-500"
+            <a
+              key={social.name}
+              href={social.href}
+              className="group flex flex-col items-center gap-4 text-neutral-500 transition-all duration-500 min-w-[100px]"
             >
-              <div 
-                className={`p-6 border border-white/10 rounded-full transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-110 group-hover:text-white bg-transparent group-hover:bg-white/5 ${social.hoverBorder} ${social.hoverShadow}`}
+              <div
+                className={`p-6 border border-white/5 rounded-full transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-110 group-hover:text-white bg-transparent group-hover:bg-gold/5 ${social.hoverBorder} ${social.hoverShadow}`}
               >
-                {/* The icon itself transitions to white while the container handles the brand glow */}
                 <div className="transition-colors duration-300">
                   {social.icon}
                 </div>
@@ -75,15 +74,15 @@ const Footer: React.FC = () => {
           <p className="text-neutral-600 text-[10px] uppercase tracking-widest font-bold">
             &copy; 2024 Urban Glam Life. All Rights Reserved.
           </p>
-          
-          <button 
+
+          <button
             onClick={scrollToTop}
             className="flex items-center gap-3 text-[10px] uppercase tracking-widest font-bold text-gold hover:text-white transition-colors group"
           >
-            Back to top 
+            Back to top
             <ArrowUp size={16} className="group-hover:-translate-y-1 transition-transform" />
           </button>
-          
+
           <div className="flex gap-8 text-neutral-600 text-[10px] uppercase tracking-widest font-bold">
             <a href="#" className="hover:text-white transition-colors">Privacy</a>
             <a href="#" className="hover:text-white transition-colors">Terms</a>
