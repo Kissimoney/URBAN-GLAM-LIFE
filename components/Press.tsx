@@ -1,5 +1,6 @@
 import React from 'react';
 import { ExternalLink, Award, Newspaper, TrendingUp, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface PressItem {
     id: number;
@@ -21,7 +22,7 @@ const Press: React.FC = () => {
             title: 'The New Face of Luxury: Urban Glam Life Redefines Elite Fashion',
             date: 'March 2024',
             excerpt: 'An in-depth look at how Urban Glam Life is reshaping the conversation around high fashion and inclusive luxury.',
-            url: '#',
+            url: '/blog/vogue-feature-new-face-of-luxury',
             category: 'Feature',
         },
         {
@@ -31,7 +32,7 @@ const Press: React.FC = () => {
             title: 'Rising Influencer Disrupts Traditional Luxury Marketing',
             date: 'February 2024',
             excerpt: 'How authenticity and confidence are becoming the new currencies in the luxury lifestyle space.',
-            url: '#',
+            url: '/blog/forbes-interview-disrupting-luxury',
             category: 'Interview',
         },
         {
@@ -41,7 +42,7 @@ const Press: React.FC = () => {
             title: 'Style Icon: The Urban Glam Aesthetic',
             date: 'January 2024',
             excerpt: 'Breaking down the signature look that\'s captivating fashion capitals worldwide.',
-            url: '#',
+            url: '/blog/harpers-bazaar-style-icon-aesthetic',
             category: 'Feature',
         },
         {
@@ -51,7 +52,7 @@ const Press: React.FC = () => {
             title: 'Luxury Lifestyle Influencer Makes Waves at Fashion Week',
             date: 'December 2023',
             excerpt: 'Front row presence and exclusive collaborations mark a breakthrough year.',
-            url: '#',
+            url: '/blog/nyt-mention-fashion-week-waves',
             category: 'Mention',
         },
     ];
@@ -114,11 +115,9 @@ const Press: React.FC = () => {
                 {/* Press Coverage Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-20 max-w-6xl mx-auto">
                     {pressItems.map((item) => (
-                        <a
+                        <Link
                             key={item.id}
-                            href={item.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            to={item.url}
                             className="group relative bg-[#050505] border border-white/5 p-10 transition-all duration-700 hover:border-gold/40 overflow-hidden shadow-2xl"
                         >
                             {/* Premium Shimmer Overlay */}
@@ -162,7 +161,7 @@ const Press: React.FC = () => {
                             {/* Corner Accents */}
                             <div className="absolute top-0 right-0 w-12 h-12 border-t border-r border-gold/0 group-hover:border-gold/30 transition-all duration-700 m-2"></div>
                             <div className="absolute bottom-0 left-0 w-12 h-12 border-b border-l border-gold/0 group-hover:border-gold/30 transition-all duration-700 m-2"></div>
-                        </a>
+                        </Link>
                     ))}
                 </div>
 
