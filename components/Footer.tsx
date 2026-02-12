@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Facebook, Instagram, Twitter, Youtube, ArrowUp } from 'lucide-react';
+import { SOCIAL_LINKS } from '../constants';
 
 const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -11,7 +12,7 @@ const Footer: React.FC = () => {
     {
       name: 'Facebook',
       icon: <Facebook size={24} />,
-      href: '#',
+      href: 'https://facebook.com/urbanglamlife',
       hoverBorder: 'group-hover:border-gold',
       hoverShadow: 'group-hover:shadow-[0_0_25px_rgba(212,175,55,0.4)]',
       hoverText: 'group-hover:text-gold'
@@ -19,7 +20,7 @@ const Footer: React.FC = () => {
     {
       name: 'Instagram',
       icon: <Instagram size={24} />,
-      href: '#',
+      href: SOCIAL_LINKS.instagram,
       hoverBorder: 'group-hover:border-gold',
       hoverShadow: 'group-hover:shadow-[0_0_25px_rgba(212,175,55,0.4)]',
       hoverText: 'group-hover:text-gold'
@@ -27,7 +28,7 @@ const Footer: React.FC = () => {
     {
       name: 'Twitter',
       icon: <Twitter size={24} />,
-      href: '#',
+      href: SOCIAL_LINKS.twitter,
       hoverBorder: 'group-hover:border-gold',
       hoverShadow: 'group-hover:shadow-[0_0_25px_rgba(212,175,55,0.4)]',
       hoverText: 'group-hover:text-gold'
@@ -35,7 +36,7 @@ const Footer: React.FC = () => {
     {
       name: 'Youtube',
       icon: <Youtube size={24} />,
-      href: '#',
+      href: SOCIAL_LINKS.youtube,
       hoverBorder: 'group-hover:border-gold',
       hoverShadow: 'group-hover:shadow-[0_0_25px_rgba(212,175,55,0.4)]',
       hoverText: 'group-hover:text-gold'
@@ -54,6 +55,8 @@ const Footer: React.FC = () => {
             <a
               key={social.name}
               href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group flex flex-col items-center gap-4 text-neutral-500 transition-all duration-500 w-full md:w-auto"
             >
               <div
