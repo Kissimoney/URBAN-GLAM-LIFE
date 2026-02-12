@@ -4,7 +4,7 @@ import { sendVIPEmail } from '../utils/emailService';
 import { useAuth } from '../context/AuthContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { ArrowRight, X, Calendar, MapPin, Star } from 'lucide-react';
+import { ArrowRight, X, Calendar, MapPin, Star, ShieldCheck, User, Globe, Briefcase } from 'lucide-react';
 import { EventGridCardSkeleton } from '../components/Skeleton';
 import SEO from '../components/SEO';
 
@@ -38,6 +38,8 @@ const EventsPage: React.FC = () => {
     const [rsvpName, setRsvpName] = useState('');
     const [rsvpEmail, setRsvpEmail] = useState('');
     const [rsvpStatus, setRsvpStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+
+    const [showConcierge, setShowConcierge] = useState(false);
 
     useEffect(() => {
         fetchEvents();
@@ -332,18 +334,29 @@ const EventsPage: React.FC = () => {
                                         ))}
                                     </div>
 
-                                    <button className="mt-12 px-12 py-6 bg-gradient-to-r from-gold/80 to-gold text-black font-black uppercase tracking-[0.4em] text-[10px] hover:from-white hover:to-white transition-all shadow-[0_10px_40px_rgba(212,175,55,0.2)] active:scale-95">
+                                    <button
+                                        onClick={() => setShowConcierge(true)}
+                                        className="mt-12 px-12 py-6 bg-gradient-to-r from-gold/80 to-gold text-black font-black uppercase tracking-[0.4em] text-[10px] hover:from-white hover:to-white transition-all shadow-[0_10px_40px_rgba(212,175,55,0.2)] active:scale-95"
+                                    >
                                         Contact Concierge
                                     </button>
                                 </div>
 
-                                <div className="relative h-[700px] rounded-[3rem] overflow-hidden shadow-2xl">
+                                <div
+                                    className="relative h-[700px] rounded-[3rem] overflow-hidden shadow-2xl cursor-pointer group/img"
+                                    onClick={() => setShowConcierge(true)}
+                                >
                                     <img
                                         src="/images/ai_character_desk.jpg"
-                                        className="w-full h-full object-cover transition-transform duration-[5s] group-hover:scale-105"
+                                        className="w-full h-full object-cover transition-transform duration-[5s] group-hover:scale-110"
                                         alt="Concierge Executive"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>
+                                    <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent opacity-60 group-hover/img:opacity-40 transition-opacity"></div>
+                                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/img:opacity-100 transition-opacity">
+                                        <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white">
+                                            <User size={32} />
+                                        </div>
+                                    </div>
                                     <div className="absolute bottom-12 right-12 text-right">
                                         <p className="text-white font-serif text-2xl italic">Evelyn Vance</p>
                                         <p className="text-gold text-[9px] uppercase tracking-[0.4em] font-black mt-2">Chief of Lifestyle</p>
@@ -432,6 +445,77 @@ const EventsPage: React.FC = () => {
                                 </button>
                             </form>
                         )}
+                    </div>
+                </div>
+            )}
+            {/* CONCIERGE IDENTITY PORTAL (The image you added) */}
+            {showConcierge && (
+                <div className="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden">
+                    <div
+                        className="absolute inset-0 bg-black/95 backdrop-blur-2xl animate-in fade-in duration-500"
+                        onClick={() => setShowConcierge(false)}
+                    ></div>
+
+                    <div className="relative w-full h-full max-w-7xl md:h-[90vh] bg-black md:rounded-[4rem] border border-white/10 overflow-hidden shadow-[0_0_100px_rgba(212,175,55,0.15)] animate-in zoom-in-95 duration-500 flex flex-col md:flex-row">
+                        <button
+                            onClick={() => setShowConcierge(false)}
+                            className="absolute top-8 right-8 z-[210] w-14 h-14 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-white/10 transition-colors"
+                        >
+                            <X size={24} />
+                        </button>
+
+                        <div className="w-full md:w-5/12 h-1/2 md:h-full relative shrink-0">
+                            <img
+                                src="/images/ai_character_face_premium.jpg"
+                                alt="Evelyn Vance"
+                                className="w-full h-full object-cover animate-in fade-in zoom-in-110 duration-1000"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent md:bg-gradient-to-r"></div>
+                            <div className="absolute bottom-12 left-12">
+                                <div className="flex items-center gap-4 mb-4">
+                                    <span className="w-10 h-px bg-gold"></span>
+                                    <span className="text-gold text-[9px] uppercase tracking-[0.5em] font-black">Identity Verified</span>
+                                    <ShieldCheck size={14} className="text-gold" />
+                                </div>
+                                <h2 className="text-4xl md:text-6xl font-serif text-white tracking-tighter">Evelyn Vance</h2>
+                                <p className="text-white/40 text-[11px] uppercase tracking-[0.6em] font-black mt-4">Inner Circle Concierge</p>
+                            </div>
+                        </div>
+
+                        <div className="w-full md:w-7/12 p-8 md:p-20 overflow-y-auto space-y-16">
+                            <div className="space-y-8">
+                                <h3 className="text-gold text-[10px] uppercase tracking-[0.5em] font-black">Executive Intro</h3>
+                                <p className="text-2xl md:text-4xl font-serif text-white/90 leading-tight italic font-light italic">
+                                    "Your time is your most precious asset. My role is to protect it while curating a life of absolute seamless luxury."
+                                </p>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                                {[
+                                    { title: 'Response Time', val: '< 15 Mins', icon: <Globe size={18} /> },
+                                    { title: 'Global Access', val: 'Level IV', icon: <Star size={18} /> },
+                                    { title: 'Personalized', val: 'Couture Service', icon: <User size={18} /> },
+                                    { title: 'Exclusivity', val: 'Member Only', icon: <Briefcase size={18} /> }
+                                ].map((item, i) => (
+                                    <div key={i} className="space-y-4 p-8 bg-neutral-900/40 rounded-3xl border border-white/5 group hover:border-gold/20 transition-all">
+                                        <div className="text-gold/40 group-hover:text-gold transition-colors">{item.icon}</div>
+                                        <div>
+                                            <p className="text-white/20 text-[9px] uppercase tracking-[0.3em] font-black mb-1">{item.title}</p>
+                                            <p className="text-white font-serif text-lg italic">{item.val}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="space-y-12">
+                                <div className="p-1 border-white/10 rounded-full bg-gradient-to-r from-gold/40 via-white/10 to-transparent">
+                                    <button className="w-full bg-black py-8 rounded-full text-white text-[10px] uppercase tracking-[0.8em] font-black hover:bg-gold hover:text-black transition-all">
+                                        Initiate Private Dialogue
+                                    </button>
+                                </div>
+                                <p className="text-center text-white/20 text-[9px] uppercase tracking-[0.3em] font-medium">Secured by Urban Glam Life Platinum encryption</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}
