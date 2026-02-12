@@ -49,21 +49,21 @@ const Footer: React.FC = () => {
           URBAN <span className="text-gold">GLAM</span> LIFE
         </h2>
 
-        <div className="flex flex-wrap justify-center gap-6 md:gap-12 mb-20 w-full max-w-4xl">
+        <div className="grid grid-cols-2 md:flex md:flex-row justify-center gap-y-12 gap-x-8 md:gap-12 mb-20 w-full max-w-4xl">
           {socialLinks.map((social) => (
             <a
               key={social.name}
               href={social.href}
-              className="group flex flex-col items-center gap-4 text-neutral-500 transition-all duration-500 min-w-[100px]"
+              className="group flex flex-col items-center gap-4 text-neutral-500 transition-all duration-500 w-full md:w-auto"
             >
               <div
-                className={`p-6 border border-white/5 rounded-full transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-110 group-hover:text-white bg-transparent group-hover:bg-gold/5 ${social.hoverBorder} ${social.hoverShadow}`}
+                className={`p-4 md:p-6 border border-white/5 rounded-full transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-110 group-hover:text-white bg-transparent group-hover:bg-gold/5 ${social.hoverBorder} ${social.hoverShadow}`}
               >
-                <div className="transition-colors duration-300">
+                <div className="transition-colors duration-300 scale-90 md:scale-100">
                   {social.icon}
                 </div>
               </div>
-              <span className={`text-[10px] uppercase tracking-[0.4em] font-black transition-all duration-500 ${social.hoverText}`}>
+              <span className={`text-[9px] md:text-[10px] uppercase tracking-[0.4em] font-black transition-all duration-500 ${social.hoverText}`}>
                 {social.name}
               </span>
             </a>
