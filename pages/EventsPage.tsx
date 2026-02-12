@@ -4,7 +4,7 @@ import { sendVIPEmail } from '../utils/emailService';
 import { useAuth } from '../context/AuthContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { ArrowRight, X, Calendar, MapPin } from 'lucide-react';
+import { ArrowRight, X, Calendar, MapPin, Star } from 'lucide-react';
 import { EventGridCardSkeleton } from '../components/Skeleton';
 import SEO from '../components/SEO';
 
@@ -292,6 +292,66 @@ const EventsPage: React.FC = () => {
                             </div>
                         </div>
                     </section>
+
+                    {/* INNER CIRCLE CONCIERGE */}
+                    <section className="mt-40 py-32 bg-neutral-900/10 rounded-[4rem] border border-white/5 overflow-hidden relative group">
+                        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_50%_50%,rgba(212,175,55,0.1),transparent_70%)]"></div>
+
+                        <div className="container mx-auto px-12">
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                                <div className="space-y-12 relative z-10 p-6 md:p-12">
+                                    <div className="flex items-center gap-6 mb-8">
+                                        <div className="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center text-gold">
+                                            <Star size={20} />
+                                        </div>
+                                        <div>
+                                            <h4 className="text-gold text-[10px] uppercase tracking-[0.6em] font-black">Inner Circle</h4>
+                                            <h3 className="text-2xl font-serif text-white uppercase tracking-widest">Concierge</h3>
+                                        </div>
+                                    </div>
+
+                                    <div className="pl-8 border-l border-gold/30">
+                                        <p className="text-neutral-400 text-xl font-serif italic leading-relaxed max-w-lg">
+                                            "Excellence is not a singular act, but a lifestyle. Your dedicated concierge is standing by to fulfill any request."
+                                        </p>
+                                    </div>
+
+                                    <div className="space-y-6">
+                                        {[
+                                            'Priority Private Viewings',
+                                            'Global Lifestyle Management',
+                                            'Curated Travel Itineraries',
+                                            'Exclusive Brand Collaborations'
+                                        ].map((service, idx) => (
+                                            <div key={idx} className="group/item flex items-center justify-between py-6 border-b border-white/5 hover:border-gold/30 transition-all cursor-pointer">
+                                                <span className="text-white/60 text-[11px] uppercase tracking-[0.4em] font-bold group-hover/item:text-white transition-colors">
+                                                    {service}
+                                                </span>
+                                                <ArrowRight size={14} className="text-gold/20 group-hover/item:text-gold transition-all -translate-x-4 group-hover/item:translate-x-0" />
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    <button className="mt-12 px-12 py-6 bg-gradient-to-r from-gold/80 to-gold text-black font-black uppercase tracking-[0.4em] text-[10px] hover:from-white hover:to-white transition-all shadow-[0_10px_40px_rgba(212,175,55,0.2)] active:scale-95">
+                                        Contact Concierge
+                                    </button>
+                                </div>
+
+                                <div className="relative h-[700px] rounded-[3rem] overflow-hidden shadow-2xl">
+                                    <img
+                                        src="/images/ai_character_desk.jpg"
+                                        className="w-full h-full object-cover transition-transform duration-[5s] group-hover:scale-105"
+                                        alt="Concierge Executive"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>
+                                    <div className="absolute bottom-12 right-12 text-right">
+                                        <p className="text-white font-serif text-2xl italic">Evelyn Vance</p>
+                                        <p className="text-gold text-[9px] uppercase tracking-[0.4em] font-black mt-2">Chief of Lifestyle</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
             </main>
 
@@ -300,13 +360,14 @@ const EventsPage: React.FC = () => {
                 <div className="container mx-auto px-6">
                     <div className="flex flex-col md:flex-row items-center gap-12 bg-neutral-900/40 p-12 rounded-[3.5rem] border border-white/5">
                         <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-gold/30 shrink-0">
-                            <img src="/images/ai_character_face_1.jpg" className="w-full h-full object-cover" alt="Ambassador" />
+                            <img src="/images/ai_character_face_premium.jpg" className="w-full h-full object-cover" alt="Ambassador" />
                         </div>
                         <div>
                             <h5 className="text-gold font-black uppercase tracking-[0.5em] text-[10px] mb-4">Ambassador's Choice</h5>
                             <p className="text-white text-lg font-serif italic leading-relaxed">
                                 "The Tokyo Neon nights are where culture truly meets couture. I'll see you at the Shibuya Sky Lounge for our private viewing next month."
                             </p>
+                            <p className="text-white/40 text-[9px] uppercase tracking-[0.4em] font-black mt-4">— Evelyn Vance</p>
                         </div>
                     </div>
                 </div>
