@@ -15,6 +15,7 @@ import Press from './components/Press';
 import Newsletter from './components/Newsletter';
 import VIPAccess from './components/VIPAccess';
 import ContactForm from './components/ContactForm';
+import EliteExperience from './components/EliteExperience';
 import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
 import BackToTop from './components/BackToTop';
@@ -46,6 +47,7 @@ const HomePage: React.FC = () => {
         <About />
         <Gallery />
         <Experiences />
+        <EliteExperience />
         <Blogs />
         <Testimonials />
         <Press />

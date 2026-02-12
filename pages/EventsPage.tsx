@@ -244,7 +244,7 @@ const EventsPage: React.FC = () => {
                                             "{event.description}"
                                         </p>
                                         <button
-                                            onClick={() => openRSVPModal(event)}
+                                            onClick={() => setShowConcierge(true)}
                                             className="w-full py-5 bg-transparent border border-white/10 text-white text-[10px] uppercase tracking-[0.4em] font-black hover:bg-gold hover:text-black hover:border-gold hover:shadow-[0_0_25px_rgba(212,175,55,0.4)] transition-all duration-700 flex items-center justify-center gap-3 group/btn relative overflow-hidden"
                                         >
                                             <span className="relative z-10">Request Access</span>
