@@ -3,6 +3,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, X, Filter } from 'lucide-react';
 import { supabase } from '../utils/supabaseClient';
+import { BlogCardSkeleton } from './Skeleton';
 
 interface BlogPost {
     id: string;
@@ -197,8 +198,10 @@ const BlogSearch: React.FC = () => {
 
                 {/* Loading State */}
                 {loading ? (
-                    <div className="flex justify-center py-20">
-                        <div className="w-10 h-10 border-2 border-gold border-t-transparent rounded-full animate-spin"></div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-7xl mx-auto py-20">
+                        {[...Array(6)].map((_, i) => (
+                            <BlogCardSkeleton key={i} />
+                        ))}
                     </div>
                 ) : (
                     <>

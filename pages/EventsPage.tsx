@@ -6,6 +6,7 @@ import { useAuth } from '../context/AuthContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { ArrowRight, X } from 'lucide-react';
+import { EventGridCardSkeleton } from '../components/Skeleton';
 
 interface Event {
     id: string;
@@ -148,8 +149,10 @@ const EventsPage: React.FC = () => {
 
                     {/* Events Grid */}
                     {loading ? (
-                        <div className="flex justify-center py-20">
-                            <div className="w-12 h-12 border-2 border-gold/20 border-t-gold rounded-full animate-spin"></div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                            {[...Array(6)].map((_, i) => (
+                                <EventGridCardSkeleton key={i} />
+                            ))}
                         </div>
                     ) : (
                         <div

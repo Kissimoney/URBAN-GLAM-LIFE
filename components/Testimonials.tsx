@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Quote, Star } from 'lucide-react';
 
 interface Testimonial {
     id: number;
@@ -78,112 +78,109 @@ const Testimonials: React.FC = () => {
 
                 {/* Testimonial Carousel */}
                 <div className="max-w-6xl mx-auto">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                         {/* Image Side */}
-                        <div className="relative">
-                            <div className="aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl relative group">
+                        <div className="relative group/card">
+                            {/* Premium Glow Effect */}
+                            <div className="absolute inset-0 bg-gold/20 blur-[100px] opacity-0 group-hover/card:opacity-30 transition-opacity duration-1000 -z-10"></div>
+
+                            <div className="aspect-[3/4] rounded-[2.5rem] overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.8)] relative">
                                 <img
                                     src={activeTestimonial.image}
                                     alt={activeTestimonial.name}
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                    className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover/card:scale-110"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
 
-                                {/* Quote Icon Overlay */}
-                                <div className="absolute top-8 right-8 w-20 h-20 bg-gold/10 backdrop-blur-md rounded-full flex items-center justify-center border border-gold/30">
-                                    <Quote size={32} className="text-gold" />
+                                {/* Floating Quote Decoration */}
+                                <div className="absolute bottom-10 right-10 w-24 h-24 bg-black/40 backdrop-blur-xl rounded-full flex items-center justify-center border border-white/10 group-hover/card:border-gold/30 transition-all duration-700">
+                                    <Quote size={32} className="text-gold/40 group-hover/card:text-gold group-hover/card:scale-110 transition-all duration-700" />
                                 </div>
                             </div>
 
-                            {/* Decorative Element */}
-                            <div className="absolute -bottom-6 -right-6 w-32 h-32 border-2 border-gold/20 rounded-3xl -z-10"></div>
+                            {/* Luxury Border Frame */}
+                            <div className="absolute -inset-4 border border-gold/10 rounded-[3rem] -z-10 group-hover:border-gold/30 transition-all duration-1000"></div>
                         </div>
 
                         {/* Content Side */}
                         <div className="relative">
-                            {/* Quote */}
-                            <div className="mb-12">
-                                <p className="text-2xl md:text-3xl font-light text-white leading-relaxed italic">
-                                    "{activeTestimonial.quote}"
+                            {/* Quote with Luxury Styling */}
+                            <div className="mb-16 relative">
+                                <div className="absolute -top-10 -left-10 text-[120px] font-serif text-gold/5 leading-none select-none">“</div>
+                                <p className="text-2xl md:text-4xl font-serif font-light text-white leading-[1.6] italic relative z-10 transition-all duration-700">
+                                    {activeTestimonial.quote}
                                 </p>
                             </div>
 
-                            {/* Rating Stars */}
-                            <div className="flex gap-2 mb-8">
-                                {[...Array(activeTestimonial.rating)].map((_, i) => (
-                                    <svg
-                                        key={i}
-                                        className="w-5 h-5 text-gold fill-current"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                                    </svg>
-                                ))}
-                            </div>
-
-                            {/* Author Info */}
-                            <div className="border-t border-white/10 pt-8">
-                                <h4 className="text-2xl font-serif text-white mb-2">
-                                    {activeTestimonial.name}
-                                </h4>
-                                <p className="text-gold text-sm uppercase tracking-widest font-bold mb-1">
-                                    {activeTestimonial.role}
-                                </p>
-                                <p className="text-neutral-500 text-sm tracking-wide">
-                                    {activeTestimonial.company}
-                                </p>
-                            </div>
-
-                            {/* Navigation Controls */}
-                            <div className="flex items-center gap-6 mt-12">
-                                <button
-                                    onClick={prevTestimonial}
-                                    className="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center text-white hover:border-gold hover:text-gold transition-all duration-500 hover:scale-110"
-                                    aria-label="Previous testimonial"
-                                >
-                                    <ChevronLeft size={24} />
-                                </button>
-
-                                <div className="flex gap-3">
-                                    {testimonials.map((_, index) => (
-                                        <button
-                                            key={index}
-                                            onClick={() => setActiveIndex(index)}
-                                            className={`h-2 rounded-full transition-all duration-500 ${index === activeIndex
-                                                    ? 'w-12 bg-gold'
-                                                    : 'w-2 bg-white/20 hover:bg-white/40'
-                                                }`}
-                                            aria-label={`Go to testimonial ${index + 1}`}
-                                        />
-                                    ))}
+                            {/* Author & Rating Group */}
+                            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-t border-white/5 pt-12">
+                                <div>
+                                    <div className="flex gap-1 mb-4">
+                                        {[...Array(activeTestimonial.rating)].map((_, i) => (
+                                            <Star key={i} size={14} className="text-gold fill-gold" />
+                                        ))}
+                                    </div>
+                                    <h4 className="text-3xl font-serif text-white mb-2 tracking-tight">
+                                        {activeTestimonial.name}
+                                    </h4>
+                                    <p className="flex items-center gap-3">
+                                        <span className="text-gold text-[10px] uppercase tracking-[0.4em] font-black">{activeTestimonial.role}</span>
+                                        <span className="w-1.5 h-1.5 rounded-full bg-white/10"></span>
+                                        <span className="text-neutral-500 text-[10px] uppercase tracking-[0.3em] font-bold">{activeTestimonial.company}</span>
+                                    </p>
                                 </div>
 
-                                <button
-                                    onClick={nextTestimonial}
-                                    className="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center text-white hover:border-gold hover:text-gold transition-all duration-500 hover:scale-110"
-                                    aria-label="Next testimonial"
-                                >
-                                    <ChevronRight size={24} />
-                                </button>
+                                {/* Inline Navigation */}
+                                <div className="flex items-center gap-4">
+                                    <button
+                                        onClick={prevTestimonial}
+                                        className="w-16 h-16 rounded-full border border-white/5 flex items-center justify-center text-white/40 hover:border-gold hover:text-gold hover:bg-gold/5 transition-all duration-500"
+                                    >
+                                        <ChevronLeft size={20} />
+                                    </button>
+                                    <button
+                                        onClick={nextTestimonial}
+                                        className="w-16 h-16 rounded-full border border-white/5 flex items-center justify-center text-white/40 hover:border-gold hover:text-gold hover:bg-gold/5 transition-all duration-500"
+                                    >
+                                        <ChevronRight size={20} />
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Progress Indicators */}
+                            <div className="flex gap-3 mt-16">
+                                {testimonials.map((_, index) => (
+                                    <button
+                                        key={index}
+                                        onClick={() => setActiveIndex(index)}
+                                        className={`h-1.5 rounded-full transition-all duration-1000 ${index === activeIndex
+                                            ? 'w-16 bg-gold shadow-[0_0_15px_rgba(212,175,55,0.5)]'
+                                            : 'w-4 bg-white/10 hover:bg-white/30'
+                                            }`}
+                                    />
+                                ))}
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {/* Brand Logos Section */}
-                <div className="mt-32 pt-20 border-t border-white/10">
-                    <p className="text-center text-neutral-500 uppercase tracking-[0.5em] text-[10px] font-black mb-16">
-                        Trusted By Industry Leaders
+                {/* Brand Logos: The Elite Network */}
+                <div className="mt-40 pt-24 border-t border-white/5 relative">
+                    {/* Floating Glows */}
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent"></div>
+
+                    <p className="text-center text-neutral-600 uppercase tracking-[0.6em] text-[10px] font-black mb-20 italic">
+                        The Elite Influence Network
                     </p>
 
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-12 items-center opacity-40">
-                        {/* Logo Placeholders - Replace with actual brand logos */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-12 items-center">
                         {['Vogue', 'Cartier', 'Louis Vuitton', 'Hermès'].map((brand, index) => (
                             <div
                                 key={index}
-                                className="flex items-center justify-center h-20 text-white/60 hover:text-gold transition-colors duration-500"
+                                className="group flex flex-col items-center justify-center gap-4 grayscale opacity-30 hover:grayscale-0 hover:opacity-100 transition-all duration-1000 cursor-default"
                             >
-                                <span className="text-2xl font-serif italic tracking-wider">{brand}</span>
+                                <span className="text-3xl font-serif text-white group-hover:text-gold transition-colors italic tracking-widest">{brand}</span>
+                                <div className="w-0 h-px bg-gold group-hover:w-12 transition-all duration-1000"></div>
                             </div>
                         ))}
                     </div>

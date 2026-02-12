@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import { ArrowRight, ShoppingBag, Filter, Heart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import SEO from '../components/SEO';
+import { ProductCardSkeleton } from '../components/Skeleton';
 
 interface Product {
     id: string;
@@ -153,8 +154,10 @@ const CollectionPage: React.FC = () => {
 
                     {/* Product Grid */}
                     {loading ? (
-                        <div className="flex justify-center py-20">
-                            <div className="w-10 h-10 border-2 border-gold border-t-transparent rounded-full animate-spin"></div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                            {[...Array(6)].map((_, i) => (
+                                <ProductCardSkeleton key={i} />
+                            ))}
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
