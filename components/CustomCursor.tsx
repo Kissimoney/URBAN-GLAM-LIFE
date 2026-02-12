@@ -1,69 +1,69 @@
+import React, { useEffect, useState } from 'react';
+import { motion, useSpring, useMotionValue } from 'framer-motion';
 
-import React, { useEffect, useRef, useState } from 'react';
-
-const CustomCursor: React.FC = () => {
-  const dotRef = useRef<HTMLDivElement>(null);
-  const ringRef = useRef<HTMLDivElement>(null);
-  const [isHovering, setIsHovering] = useState(false);
+const CustomCursor = () => {
+  const [isHovered, setIsHovered] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
+  // Motion values for X and Y positions
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+
+  // Smooth spring physics for that "Elite" lag feel
+  const springConfig = { damping: 25, stiffness: 150 };
+  const smoothX = useSpring(cursorX, springConfig);
+  const smoothY = useSpring(cursorY, springConfig);
+
   useEffect(() => {
-    const onMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
+    const moveCursor = (e: MouseEvent) => {
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
       if (!isVisible) setIsVisible(true);
-      
-      if (dotRef.current) {
-        dotRef.current.style.transform = `translate3d(${clientX}px, ${clientY}px, 0)`;
-      }
-      if (ringRef.current) {
-        // Use a slight delay for the ring via transition or manual raf
-        ringRef.current.style.transform = `translate3d(${clientX}px, ${clientY}px, 0)`;
-      }
     };
 
-    const onMouseDown = () => setIsHovering(true);
-    const onMouseUp = () => setIsHovering(false);
-
-    const handleLinkHover = () => {
-      const hoverables = document.querySelectorAll('a, button, .cursor-pointer, input, select, textarea');
-      hoverables.forEach((el) => {
-        el.addEventListener('mouseenter', () => setIsHovering(true));
-        el.addEventListener('mouseleave', () => setIsHovering(false));
-      });
+    const handleHover = (e: MouseEvent) => {
+      // Check if the element being hovered is a link, button, or input
+      const target = e.target as HTMLElement;
+      const isSelectable = target.closest('button, a, input, select, .group');
+      setIsHovered(!!isSelectable);
     };
 
-    window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('mousedown', onMouseDown);
-    window.addEventListener('mouseup', onMouseUp);
-    
-    // Initial check and dynamic check for new elements
-    handleLinkHover();
-    const observer = new MutationObserver(handleLinkHover);
-    observer.observe(document.body, { childList: true, subtree: true });
+    const handleMouseLeave = () => setIsVisible(false);
+    const handleMouseEnter = () => setIsVisible(true);
+
+    window.addEventListener('mousemove', moveCursor);
+    window.addEventListener('mouseover', handleHover);
+    document.addEventListener('mouseleave', handleMouseLeave);
+    document.addEventListener('mouseenter', handleMouseEnter);
 
     return () => {
-      window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('mousedown', onMouseDown);
-      window.removeEventListener('mouseup', onMouseUp);
-      observer.disconnect();
+      window.removeEventListener('mousemove', moveCursor);
+      window.removeEventListener('mouseover', handleHover);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener('mouseenter', handleMouseEnter);
     };
-  }, [isVisible]);
-
-  if (!isVisible) return null;
+  }, [cursorX, cursorY, isVisible]);
 
   return (
-    <>
-      <div 
-        ref={dotRef}
-        className="custom-cursor fixed top-0 left-0 w-1.5 h-1.5 bg-gold rounded-full z-[9999] pointer-events-none -translate-x-1/2 -translate-y-1/2 transition-transform duration-75 ease-out"
-      />
-      <div 
-        ref={ringRef}
-        className={`custom-cursor fixed top-0 left-0 border border-gold/40 rounded-full z-[9998] pointer-events-none -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-out ${
-          isHovering ? 'w-16 h-16 bg-gold/5 scale-110 opacity-100' : 'w-10 h-10 opacity-40 scale-100'
-        }`}
-      />
-    </>
+    <motion.div
+      className="fixed top-0 left-0 border rounded-full pointer-events-none z-[9999] hidden md:block"
+      style={{
+        x: smoothX,
+        y: smoothY,
+        translateX: '-50%',
+        translateY: '-50%',
+        width: isHovered ? '48px' : '24px',
+        height: isHovered ? '48px' : '24px',
+        borderColor: '#E2E8F0', // Silver
+        backgroundColor: isHovered ? 'rgba(226, 232, 240, 0.1)' : 'transparent',
+        borderWidth: isHovered ? '1px' : '2px',
+        opacity: isVisible ? 1 : 0,
+      }}
+      transition={{ type: 'spring', stiffness: 250, damping: 20 }}
+    >
+      {/* Center dot - stays consistent */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-[#E2E8F0] rounded-full" />
+    </motion.div>
   );
 };
 

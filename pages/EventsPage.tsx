@@ -140,12 +140,12 @@ const EventsPage: React.FC = () => {
                     <div
                         className="absolute inset-0 bg-cover bg-center transition-transform duration-[3s] ease-out scale-110"
                         style={{
-                            backgroundImage: `url('/images/event_neon_night.jpg')`,
+                            backgroundImage: `url('https://i.imgur.com/JtOWCDK.jpg')`, // Midnight Gala (Paris)
                             transform: `translateY(${scrollY * 0.2}px)`
                         }}
                     >
-                        <div className="absolute inset-0 bg-black/60"></div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40"></div>
+                        <div className="absolute inset-0 bg-black/50"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black/40"></div>
                     </div>
 
                     <div className="container mx-auto px-6 relative z-10 text-center">
@@ -157,8 +157,8 @@ const EventsPage: React.FC = () => {
                         <h1 className="text-6xl md:text-[10rem] font-serif font-bold text-white tracking-tighter leading-none italic mb-12 drop-shadow-2xl">
                             Exclusive <br /> <span className="text-gold not-italic">Events</span>
                         </h1>
-                        <p className="text-white/60 max-w-2xl mx-auto text-lg md:text-xl font-light leading-relaxed tracking-wide animate-in fade-in duration-1000 delay-500">
-                            Curated experiences for the elite. From Tokyo neon nights to Mediterranean sunsets, your presence is the final touch of glamour.
+                        <p className="text-white/80 max-w-2xl mx-auto text-lg md:text-xl font-light leading-relaxed tracking-wide animate-in fade-in duration-1000 delay-500">
+                            Curated experiences for the elite. From Parisian midnight galas to the slopes of Zermatt, your presence is the final touch of glamour.
                         </p>
                     </div>
 
@@ -262,23 +262,23 @@ const EventsPage: React.FC = () => {
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
                             <div className="relative group overflow-hidden rounded-[3rem] aspect-[4/5] md:aspect-square">
                                 <img
-                                    src="/images/event_yacht_sunset.jpg"
+                                    src="https://i.imgur.com/3yKnhuG.jpg" // Alpine Retreat (Zermatt)
                                     alt="Luxury Lifestyle"
                                     className="w-full h-full object-cover transition-all duration-[3s] group-hover:scale-110"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                                 <div className="absolute bottom-12 left-12">
-                                    <p className="text-gold text-[10px] uppercase tracking-[0.5em] font-black mb-4">The Mediterranean Circuit</p>
-                                    <h4 className="text-4xl font-serif text-white italic">Platinum Summer Season</h4>
+                                    <p className="text-gold text-[10px] uppercase tracking-[0.5em] font-black mb-4">The Zermatt Circuit</p>
+                                    <h4 className="text-4xl font-serif text-white italic">Alpine Winter Season</h4>
                                 </div>
                                 <div className="absolute inset-0 border-[20px] border-white/5 pointer-events-none"></div>
                             </div>
                             <div className="space-y-12">
                                 <h3 className="text-5xl md:text-7xl font-serif text-white leading-tight tracking-tighter">
-                                    More Than Just <br /><span className="text-gold italic">An RSVP.</span>
+                                    Above <br /><span className="text-gold italic">The Clouds.</span>
                                 </h3>
                                 <p className="text-neutral-500 text-xl font-light leading-relaxed">
-                                    Membership at Urban Glam Life grants you more than entry—it grants you status. Every event on our calendar is an opportunity to network with global mues, creators, and elite visionaries.
+                                    Experience the pinnacle of winter luxury. From private chalet viewings to helicopter transfers, the Zermatt circuit is reserved for those who live life at a higher altitude.
                                 </p>
                                 <div className="flex flex-col gap-8">
                                     {[
