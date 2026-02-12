@@ -27,11 +27,11 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-black/90 backdrop-blur-md py-4 border-b border-white/10' : 'bg-transparent py-6'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-black/80 backdrop-blur-md py-4 border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]' : 'bg-transparent py-6'
         }`}
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <a href="/" className="text-2xl md:text-3xl font-serif font-bold tracking-tighter">
+        <a href="/" className="text-xl md:text-3xl font-serif font-bold tracking-tighter hover:text-white/80 transition-colors">
           URBAN <span className="text-gold">GLAM</span> LIFE
         </a>
 
@@ -41,14 +41,14 @@ const Header: React.FC = () => {
             <a
               key={link.name}
               href={link.href}
-              className="text-[10px] uppercase tracking-[0.2em] font-bold text-white/80 hover:text-gold transition-all duration-300"
+              className="text-[10px] uppercase tracking-[0.2em] font-bold text-white/80 hover:text-gold transition-all duration-300 hover:scale-105"
             >
               {link.name}
             </a>
           ))}
           <a
             href={user ? "/dashboard" : "/access"}
-            className="bg-gold text-black px-8 py-3 rounded-none font-black text-[10px] uppercase tracking-[0.2em] hover:bg-white transition-all duration-500"
+            className="bg-gold text-black px-8 py-3 rounded-none font-black text-[10px] uppercase tracking-[0.2em] hover:bg-white transition-all duration-500 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)]"
           >
             {user ? "Dashboard" : "Member Access"}
           </a>
@@ -56,10 +56,10 @@ const Header: React.FC = () => {
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden text-white"
+          className="md:hidden text-white p-2 hover:text-gold transition-colors"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
-          {mobileMenuOpen ? <X size={32} /> : <Menu size={32} />}
+          {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 

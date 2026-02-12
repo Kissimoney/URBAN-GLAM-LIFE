@@ -65,15 +65,15 @@ const GalleryCard: React.FC<{
         }}
         className={`relative overflow-hidden rounded-3xl cursor-pointer bg-neutral-950
         transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]
-        hover:-translate-y-4
-        shadow-2xl hover:shadow-[0_40px_100px_-20px_rgba(0,0,0,0.9),0_0_60px_rgba(212,175,55,0.4),0_0_20px_rgba(212,175,55,0.15)] 
+        hover:-translate-y-4 hover:scale-105
+        shadow-2xl hover:shadow-[0_40px_100px_-20px_rgba(0,0,0,0.9),0_0_30px_rgba(212,175,55,0.5)] 
         ${isCinematic ? 'aspect-[16/9]' : 'aspect-[4/5]'}`}
       >
-        {/* IMAGE WITH 10% ZOOM */}
+        {/* IMAGE WITH 5% ZOOM */}
         <img
           src={img.url}
           alt={img.title}
-          className="w-full h-full object-cover will-change-transform transition-all duration-[2400ms] ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-110 opacity-100 group-hover:opacity-40"
+          className="w-full h-full object-cover will-change-transform transition-all duration-[2400ms] ease-[cubic-bezier(0.23,1,0.32,1)] opacity-100 group-hover:opacity-60"
         />
 
         {/* METALLIC GLINT SWEEP */}
@@ -216,7 +216,7 @@ const Gallery: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-28 gap-x-10 lg:gap-x-16 min-h-[800px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20 gap-x-10 lg:gap-x-16 min-h-[800px]">
           {filteredImages.map((img, index) => (
             <GalleryCard
               key={`${activeCategory}-${img.title}-${index}`}

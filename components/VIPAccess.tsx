@@ -84,7 +84,7 @@ const VIPAccess: React.FC = () => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Your email address"
               disabled={isSubmitting}
-              className="flex-grow bg-white/5 border border-white/10 px-8 py-6 focus:outline-none focus:border-gold transition-all duration-700 text-white placeholder-white/20 text-sm tracking-widest rounded-none disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-grow bg-white/5 border border-white/10 px-8 py-6 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all duration-700 text-white placeholder-white/20 text-sm tracking-widest rounded-none disabled:opacity-50 disabled:cursor-not-allowed"
             />
             <button
               type="submit"
@@ -95,7 +95,7 @@ const VIPAccess: React.FC = () => {
                 {isSubmitting ? 'Processing...' : 'Secure Invite'}
               </span>
               {!isSubmitting && (
-                <div className="absolute inset-0 w-[200%] h-full -translate-x-full group-hover/btn:translate-x-full transition-transform duration-[1200ms] ease-out bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none"></div>
+                <div className="absolute inset-0 w-[200%] h-full -translate-x-full group-hover/btn:translate-x-full animate-[shimmer_3s_infinite] transition-transform duration-[1200ms] ease-out bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none"></div>
               )}
             </button>
           </form>

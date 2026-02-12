@@ -130,7 +130,7 @@ const Newsletter: React.FC = () => {
                                     onChange={(e) => setEmail(e.target.value)}
                                     placeholder="your@email.com"
                                     disabled={isSubmitting}
-                                    className="w-full bg-white/5 border border-white/10 px-6 py-5 focus:outline-none focus:border-gold transition-all duration-500 text-white placeholder-white/20 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="w-full bg-white/5 border border-white/10 px-6 py-5 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all duration-500 text-white placeholder-white/20 disabled:opacity-50 disabled:cursor-not-allowed"
                                 />
                             </div>
 
@@ -223,7 +223,7 @@ const Newsletter: React.FC = () => {
                                         {isSubmitting ? 'Subscribing...' : 'Subscribe Now'}
                                     </span>
                                     {!isSubmitting && (
-                                        <div className="absolute inset-0 w-[200%] h-full -translate-x-full group-hover:translate-x-full transition-transform duration-[1200ms] ease-out bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none"></div>
+                                        <div className="absolute inset-0 w-[200%] h-full -translate-x-full group-hover:translate-x-full animate-[shimmer_3s_infinite] transition-transform duration-[1200ms] ease-out bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none"></div>
                                     )}
                                 </button>
 

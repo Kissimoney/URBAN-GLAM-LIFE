@@ -81,18 +81,18 @@ const Blogs: React.FC = () => {
             <Link
               key={post.id}
               to={`/blog/${post.slug}`}
-              className="group cursor-pointer flex flex-col h-full animate-in fade-in slide-in-from-bottom duration-1000"
+              className="group cursor-pointer flex flex-col h-full animate-in fade-in-up slide-in-from-bottom-10 duration-1000 fill-mode-both"
               style={{ animationDelay: `${index * 200}ms` }}
             >
-              <article className="flex flex-col h-full">
+              <article className="flex flex-col h-full relative">
                 {/* IMAGE CONTAINER WITH PREMIUM REFINEMENTS */}
-                <div className="overflow-hidden mb-10 relative aspect-[4/5] bg-neutral-950 rounded-3xl luxury-shadow transition-all duration-[1200ms] ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:-translate-y-4">
+                <div className="overflow-hidden mb-10 relative aspect-[4/5] bg-neutral-950 rounded-3xl luxury-shadow transition-all duration-[1200ms] ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:-translate-y-4 group-hover:scale-[1.02] group-hover:shadow-[0_0_30px_rgba(212,175,55,0.3)]">
 
-                  {/* 10% ZOOM & 40% OPACITY EFFECT */}
+                  {/* 5% ZOOM & OPACITY EFFECT */}
                   <img
                     src={post.image}
                     alt={post.title}
-                    className="w-full h-full object-cover will-change-transform transition-all duration-[2400ms] ease-[cubic-bezier(0.23,1,0.32,1)] opacity-75 group-hover:opacity-40 group-hover:scale-110"
+                    className="w-full h-full object-cover will-change-transform transition-all duration-[2400ms] ease-[cubic-bezier(0.23,1,0.32,1)] opacity-75 group-hover:opacity-100 group-hover:scale-105"
                   />
 
                   {/* HIGH-FIDELITY GLINT SWEEP */}
@@ -106,12 +106,12 @@ const Blogs: React.FC = () => {
                   </div>
 
                   {/* CATEGORY TAG */}
-                  <div className="absolute top-8 left-8 bg-black/80 backdrop-blur-md px-6 py-2 text-[10px] tracking-[0.6em] uppercase font-black text-gold border border-gold/30 group-hover:bg-gold group-hover:text-black transition-all duration-700 z-30">
+                  <div className="absolute top-8 left-8 bg-black/80 backdrop-blur-md px-6 py-2 text-[10px] tracking-[0.6em] uppercase font-black text-gold border border-gold/30 group-hover:bg-gold group-hover:text-black transition-all duration-700 z-30 shadow-lg">
                     {post.category}
                   </div>
 
                   {/* HOVER BORDER ACCENT */}
-                  <div className="absolute inset-0 border border-gold/0 group-hover:border-gold/20 rounded-3xl transition-all duration-1000 pointer-events-none z-40"></div>
+                  <div className="absolute inset-0 border border-gold/0 group-hover:border-gold/30 rounded-3xl transition-all duration-1000 pointer-events-none z-40"></div>
                 </div>
 
                 {/* CONTENT */}
@@ -126,7 +126,7 @@ const Blogs: React.FC = () => {
                     {post.title}
                   </h4>
 
-                  <div className="mt-auto pt-8 border-t border-white/5 flex items-center justify-between">
+                  <div className="mt-auto pt-8 border-t border-white/5 flex items-center justify-between group-hover:border-gold/30 transition-colors duration-700">
                     <button className="flex items-center gap-6 text-[11px] font-black uppercase tracking-[0.8em] text-white/30 group-hover:text-white transition-all duration-700">
                       Discover
                       <div className="w-10 h-px bg-gold/30 group-hover:w-20 group-hover:bg-gold transition-all duration-1000"></div>

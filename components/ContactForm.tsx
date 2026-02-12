@@ -140,7 +140,7 @@ const ContactForm: React.FC = () => {
                     value={formData.name}
                     onChange={handleChange}
                     disabled={isSubmitting}
-                    className="w-full bg-black/40 border-b border-white/10 px-0 py-4 focus:outline-none focus:border-gold transition-all duration-500 text-white placeholder-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-black/40 border-b border-white/10 px-0 py-4 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/0 transition-all duration-500 text-white placeholder-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
                     placeholder="E.g. Alexander McQueen PR"
                   />
                 </div>
@@ -153,7 +153,7 @@ const ContactForm: React.FC = () => {
                     value={formData.email}
                     onChange={handleChange}
                     disabled={isSubmitting}
-                    className="w-full bg-black/40 border-b border-white/10 px-0 py-4 focus:outline-none focus:border-gold transition-all duration-500 text-white placeholder-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-black/40 border-b border-white/10 px-0 py-4 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/0 transition-all duration-500 text-white placeholder-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
                     placeholder="contact@brand.com"
                   />
                 </div>
@@ -167,7 +167,7 @@ const ContactForm: React.FC = () => {
                     value={formData.engagementType}
                     onChange={handleChange}
                     disabled={isSubmitting}
-                    className="w-full bg-black/40 border-b border-white/10 px-0 py-4 focus:outline-none focus:border-gold transition-all duration-500 text-white appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-black/40 border-b border-white/10 px-0 py-4 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/0 transition-all duration-500 text-white appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <option className="bg-neutral-900">Brand Ambassadorship</option>
                     <option className="bg-neutral-900">High-Fashion Editorial</option>
@@ -189,7 +189,7 @@ const ContactForm: React.FC = () => {
                   value={formData.message}
                   onChange={handleChange}
                   disabled={isSubmitting}
-                  className="w-full bg-black/40 border-b border-white/10 px-0 py-4 focus:outline-none focus:border-gold transition-all duration-500 text-white resize-none placeholder-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-black/40 border-b border-white/10 px-0 py-4 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/0 transition-all duration-500 text-white resize-none placeholder-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
                   placeholder="Outline your vision for the collaboration..."
                 ></textarea>
               </div>
@@ -204,7 +204,7 @@ const ContactForm: React.FC = () => {
                   </span>
 
                   {/* BUTTON GLINT */}
-                  <div className="absolute inset-0 w-[200%] h-full -translate-x-full group-hover:translate-x-full transition-transform duration-[1200ms] ease-out bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none"></div>
+                  <div className="absolute inset-0 w-[200%] h-full -translate-x-full group-hover:translate-x-full animate-[shimmer_3s_infinite] transition-transform duration-[1200ms] ease-out bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none"></div>
                 </button>
 
 

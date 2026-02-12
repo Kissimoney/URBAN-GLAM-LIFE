@@ -59,7 +59,7 @@ const Experiences: React.FC = () => {
                   {(idx + 1).toString().padStart(2, '0')}
                 </span>
 
-                <div className="w-full md:w-1/3 mb-10 md:mb-0 relative overflow-hidden rounded-2xl aspect-video md:aspect-square lg:aspect-[4/3] luxury-shadow">
+                <div className="w-full md:w-1/3 mb-10 md:mb-0 relative overflow-hidden rounded-2xl aspect-square md:aspect-square lg:aspect-[4/3] luxury-shadow">
                   <img
                     src={exp.image_url}
                     alt={exp.title}
