@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
     {
       name: 'Facebook',
       icon: <Facebook size={24} />,
-      href: 'https://facebook.com/urbanglamlife',
+      href: SOCIAL_LINKS.facebook,
       hoverBorder: 'group-hover:border-gold',
       hoverShadow: 'group-hover:shadow-[0_0_25px_rgba(212,175,55,0.4)]',
       hoverText: 'group-hover:text-gold'

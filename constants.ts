@@ -36,6 +36,7 @@ export const SOCIAL_LINKS = {
     twitter: 'https://twitter.com/urbanglamlife',
     tiktok: 'https://tiktok.com/@urbanglamlife',
     youtube: 'https://youtube.com/@urbanglamlife',
+    facebook: 'https://www.facebook.com/profile.php?id=61587552791697',
 } as const;
 
 // Gallery categories
