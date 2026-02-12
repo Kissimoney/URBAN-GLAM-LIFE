@@ -145,7 +145,7 @@ const Gallery: React.FC = () => {
     { url: 'https://i.imgur.com/gMeVCKs.jpg', title: 'Couture Nights', category: 'Fashion' },
     { url: 'https://i.imgur.com/bLnJK4n.jpg', title: 'Private Ascent', category: 'Travel' },
     { url: 'https://i.imgur.com/pFpLtb9.jpg', title: 'Elite Lounge', category: 'Nightlife' },
-    { url: 'https://i.imgur.com/MndTitA.jpg', title: 'Gala Presence', category: 'Fashion' },
+    { url: '/images/ai_character_face_1.jpg', title: 'Gala Presence', category: 'Fashion' },
     { url: 'https://i.imgur.com/zVzNj7W.jpg', title: 'Monaco Stay', category: 'Travel' },
     { url: 'https://i.imgur.com/AAsS2HM.jpg', title: 'Velvet Access', category: 'Nightlife' },
   ], []);

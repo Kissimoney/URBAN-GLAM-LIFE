@@ -44,7 +44,7 @@ const Hero: React.FC = () => {
             muted
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
-            poster="https://i.imgur.com/5MGlsgg.jpg"
+            poster="/images/ai_character_face_2.jpg"
           >
             {/* Add your video source here */}
             <source src="https://assets.mixkit.co/videos/preview/mixkit-fashion-model-walking-in-a-dark-studio-39875-large.mp4" type="video/mp4" />
@@ -58,7 +58,7 @@ const Hero: React.FC = () => {
         <div
           className="absolute inset-0 w-full h-[140%] -top-[20%] bg-cover bg-center bg-no-repeat will-change-transform scale-110"
           style={{
-            backgroundImage: `url('https://i.imgur.com/5MGlsgg.jpg')`,
+            backgroundImage: `url('/images/ai_character_face_2.jpg')`,
             transform: `translate3d(0, ${parallaxOffset}px, 0)`,
             backgroundAttachment: 'fixed',
           }}

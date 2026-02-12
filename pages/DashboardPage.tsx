@@ -8,6 +8,7 @@ import { useNavigate, Link } from 'react-router-dom'; // Added Link
 import { Calendar, Star, LogOut, Heart, ArrowRight, X } from 'lucide-react';
 import SEO from '../components/SEO';
 import { EventCardSkeleton, WishlistCardSkeleton } from '../components/Skeleton';
+import BrandIntro from '../components/BrandIntro';
 
 interface RSVP {
     id: string;
@@ -39,7 +40,15 @@ const DashboardPage: React.FC = () => {
     const [rsvps, setRsvps] = useState<RSVP[]>([]);
     const [wishlist, setWishlist] = useState<WishlistItem[]>([]);
     const [loading, setLoading] = useState(true);
+    const [showIntro, setShowIntro] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const hasSeenIntro = sessionStorage.getItem('ugl_dash_intro');
+        if (!hasSeenIntro) {
+            setShowIntro(true);
+        }
+    }, []);
 
     useEffect(() => {
         if (user) {
@@ -129,8 +138,16 @@ const DashboardPage: React.FC = () => {
     if (!user) return null;
 
     return (
-        <div className="bg-neutral-950 min-h-screen text-white flex flex-col selection:bg-gold selection:text-black">
+        <div className="bg-neutral-950 min-h-screen text-white flex flex-col selection:bg-gold selection:text-black relative">
             <SEO title="VIP Dashboard" description="Manage your RSVPs, wishlist, and member privileges." />
+
+            {showIntro && (
+                <BrandIntro onComplete={() => {
+                    setShowIntro(false);
+                    sessionStorage.setItem('ugl_dash_intro', 'true');
+                }} />
+            )}
+
             <Header />
 
             <main className="flex-grow pt-24 md:pt-40 pb-20 px-4 md:px-12">
@@ -203,21 +220,21 @@ const DashboardPage: React.FC = () => {
                                         ))}
                                     </div>
                                 ) : rsvps.length === 0 ? (
-                                    <div className="bg-[#0c0c0c]/40 border border-white/5 rounded-3xl p-12 md:p-24 text-center group hover:border-gold/10 transition-colors relative overflow-hidden">
+                                    <div className="bg-[#0c0c0c]/40 border border-white/5 rounded-[40px] p-12 md:p-24 text-center group hover:border-gold/10 transition-all duration-700 relative overflow-hidden flex flex-col items-center justify-center">
                                         {/* Subtle background pattern/grid */}
                                         <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
 
-                                        <div className="w-24 h-24 bg-neutral-900/80 border border-white/5 flex items-center justify-center rounded-3xl mx-auto mb-10 text-white/5 group-hover:text-gold/40 transition-all duration-1000 group-hover:scale-110 group-hover:rotate-6">
+                                        <div className="w-24 h-24 bg-neutral-900/80 border border-white/5 flex items-center justify-center rounded-3xl mb-10 text-white/5 group-hover:text-gold/40 transition-all duration-1000 group-hover:scale-110 group-hover:rotate-6 relative z-10">
                                             <Calendar size={40} strokeWidth={1} />
                                         </div>
-                                        <h4 className="text-white text-2xl font-serif font-light mb-4">No Active Inquiries</h4>
-                                        <p className="text-white/30 mb-12 font-light max-w-sm mx-auto leading-relaxed text-sm italic">"Your repository of curated experiences awaits colonization. The calendar is open for your selection."</p>
+                                        <h4 className="text-white text-2xl md:text-3xl font-serif font-light mb-4 relative z-10 italic">No Active Inquiries</h4>
+                                        <p className="text-white/30 mb-12 font-light max-w-sm mx-auto leading-relaxed text-sm italic relative z-10">"Your repository of curated experiences awaits colonization. The calendar is open for your selection."</p>
                                         <button
                                             onClick={() => navigate('/events')}
-                                            className="relative overflow-hidden group/btn bg-transparent border border-gold/40 text-gold hover:text-black py-4 px-12 text-[10px] uppercase tracking-[0.4em] font-black transition-all duration-500"
+                                            className="relative overflow-hidden group/btn bg-gradient-to-br from-[#D4AF37] via-[#C5A028] to-[#8A6D3B] text-black py-5 px-14 text-[11px] uppercase tracking-[0.5em] font-black transition-all duration-300 ease-in-out hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] hover:scale-105 active:scale-95 shadow-2xl z-10"
                                         >
                                             <span className="relative z-10">View Social Calendar</span>
-                                            <div className="absolute inset-0 bg-gold translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500"></div>
+                                            <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover/btn:animate-shimmer"></div>
                                         </button>
                                     </div>
                                 ) : (
@@ -390,7 +407,7 @@ const DashboardPage: React.FC = () => {
                                     ))}
                                 </ul>
 
-                                <button className="w-full relative overflow-hidden group/btn bg-gold text-black py-8 font-black text-[11px] uppercase tracking-[0.5em] transition-all hover:bg-white shadow-[0_30px_60px_rgba(212,175,55,0.2)]">
+                                <button className="w-full relative overflow-hidden group/btn bg-gradient-to-br from-[#D4AF37] via-[#C5A028] to-[#8A6D3B] text-black py-8 font-black text-[11px] uppercase tracking-[0.5em] transition-all duration-300 ease-in-out hover:shadow-[0_0_40px_rgba(212,175,55,0.3)] hover:scale-[1.02] active:scale-95 shadow-2xl">
                                     <span className="relative z-10">Contact Concierge</span>
                                     <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover/btn:animate-shimmer"></div>
                                 </button>

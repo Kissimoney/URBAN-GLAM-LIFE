@@ -38,7 +38,7 @@ const Testimonials: React.FC = () => {
             name: 'Sophia Laurent',
             role: 'Brand Ambassador',
             company: 'Cartier',
-            image: 'https://i.imgur.com/KPAkrhe.jpg',
+            image: '/images/ai_character_face_1.jpg',
             quote: 'Authenticity meets elegance. Every project is executed with meticulous attention to detail and an innate sense of what resonates with the elite audience. Simply exceptional.',
             rating: 5,
         },

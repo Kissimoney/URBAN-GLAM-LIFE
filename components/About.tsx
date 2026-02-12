@@ -19,7 +19,7 @@ const About: React.FC = () => {
 
               <div className="relative w-full h-full rounded-full overflow-hidden border-[16px] border-white/5 shadow-2xl group transition-transform duration-1000">
                 <img
-                  src="https://i.imgur.com/oKwOd93.jpg"
+                  src="/images/ai_character_face_1.jpg"
                   alt="The Woman Behind the Vibe"
                   className="w-full h-full object-cover transition-all duration-[3000ms] ease-out group-hover:scale-115"
                 />
