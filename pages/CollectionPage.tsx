@@ -22,30 +22,30 @@ interface Product {
 const CURATED_PRODUCTS: Product[] = [
     {
         id: 'ali-1',
-        name: 'Midnight Quilted Crossbody',
-        description: 'High-quality sheepskin with gold-tone hardware and iconic quilting.',
-        price: '$58.00',
+        name: 'Oil-Wax Leather Tote',
+        description: "Genuine Cowhide top-handle bag. A sophisticated messenger piece for the modern elite.",
+        price: '$85.00',
         category: 'Accessories',
-        image_url: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=800',
-        affiliate_url: 'https://www.aliexpress.com/w/wholesale-affiliate-program.html'
+        image_url: 'https://ae01.alicdn.com/kf/S0ff1eb226d314a72965d7eac8aae33000.jpg_800x800.jpg',
+        affiliate_url: 'https://s.click.aliexpress.com/e/_c3KjTCyR'
     },
     {
         id: 'ali-2',
-        name: 'Moissanite Aura Bracelet',
-        description: 'D-Color Moissanite stones with VVS1 clarity in 925 sterling silver.',
-        price: '$89.00',
+        name: 'KNOBSPIN Moissanite Tennis',
+        description: 'D VVS1 Moissanite set in S925 Sterling Silver. Certified 18K White Gold plating.',
+        price: '$120.00',
         category: 'Jewelry',
-        image_url: 'https://images.unsplash.com/photo-1515562141207-7a18b5ce01c4?q=80&w=800',
-        affiliate_url: 'https://www.aliexpress.com/w/wholesale-affiliate-program.html'
+        image_url: 'https://ae01.alicdn.com/kf/S22b5a16f21db453e9e121c693bf380f0l.jpg_800x800.jpg',
+        affiliate_url: 'https://s.click.aliexpress.com/e/_c3kwBSVt'
     },
     {
         id: 'ali-3',
-        name: 'The Executive Blazer',
-        description: 'Double-breasted wool blend with structured shoulders and royal buttons.',
-        price: '$65.00',
+        name: 'Office Couture Blazer',
+        description: 'Korean-inspired sharp tailoring for the high-performing professional.',
+        price: '$75.00',
         category: 'Apparel',
-        image_url: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=800',
-        affiliate_url: 'https://www.aliexpress.com/w/wholesale-affiliate-program.html'
+        image_url: 'https://ae01.alicdn.com/kf/S6e02a5c4e0484032a6283890332abeeeo.jpg_800x800.jpg',
+        affiliate_url: 'https://s.click.aliexpress.com/e/_c2xqYI3l'
     },
     {
         id: 'ali-4',
