@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Sparkles } from 'lucide-react';
 import { getAIResponse } from '../utils/geminiService';
+import { useLanguage } from '../context/LanguageContext';
 
 interface ChatMessage {
     role: "user" | "model";
@@ -9,6 +10,7 @@ interface ChatMessage {
 }
 
 const ChatWidget: React.FC = () => {
+    const { language } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<ChatMessage[]>([]);
     const [inputValue, setInputValue] = useState('');
@@ -35,17 +37,7 @@ const ChatWidget: React.FC = () => {
         setIsLoading(true);
 
         try {
-            const responseText = await getAIResponse(messages, inputValue); // Pass history WITHOUT current message? 
-            // Actually geminiService.ts handles history reconstruction differently in startChat if we passed history including current message it would duplicate?
-            // Wait, startChat(history) sets PREVIOUS context. Then sendMessage(current) adds the new turn.
-            // So passed history should contain all previous turns EXCLUDING the one being sent now?
-            // Yes. So passing `messages` (which includes previous turns) is correct.
-            // But wait! Creating `newMessages` includes the CURRENT user input.
-            // If `getAIResponse` takes `history` argument and initializes `startChat` with it, then calls `sendMessage(inputValue)`,
-            // the `history` argument passed to `getAIResponse` should NOT contain `inputValue` yet.
-            // So I should pass `messages` (the OLD state) to `getAIResponse`, NOT `newMessages`.
-
-            const aiResponseText = await getAIResponse(messages, inputValue);
+            const aiResponseText = await getAIResponse(messages, inputValue, language);
 
             const aiMessage: ChatMessage = { role: 'model', parts: [{ text: aiResponseText }] };
             setMessages(prev => [...prev, aiMessage]);
@@ -80,8 +72,8 @@ const ChatWidget: React.FC = () => {
                         <Sparkles size={18} className="text-gold" />
                     </div>
                     <div>
-                        <h3 className="text-white font-serif font-bold text-lg leading-tight">Aria</h3>
-                        <p className="text-gold/60 text-[10px] uppercase tracking-widest font-bold">AI Concierge</p>
+                        <h3 className="text-white font-serif font-bold text-lg leading-tight">Evelyn Vance</h3>
+                        <h3 className="text-gold/60 text-[10px] uppercase tracking-widest font-bold">Inner Circle Concierge</h3>
                     </div>
                 </div>
 
@@ -98,8 +90,8 @@ const ChatWidget: React.FC = () => {
                         <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                             <div
                                 className={`max-w-[80%] p-4 rounded-2xl text-sm leading-relaxed ${msg.role === 'user'
-                                        ? 'bg-gold text-black font-medium rounded-tr-none'
-                                        : 'bg-neutral-800 text-neutral-200 border border-white/5 rounded-tl-none'
+                                    ? 'bg-gold text-black font-medium rounded-tr-none'
+                                    : 'bg-neutral-800 text-neutral-200 border border-white/5 rounded-tl-none'
                                     }`}
                             >
                                 {msg.parts[0].text}

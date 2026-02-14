@@ -1,0 +1,31 @@
+{
+    "common": {
+        "welcome": "Welcome",
+        "signOut": "Sign Out",
+        "contactConcierge": "Contact Concierge",
+        "dashboard": "VIP Dashboard",
+        "loading": "Loading...",
+        "back": "Back"
+    },
+    "dashboard": {
+        "innerCircleStatus": "Inner Circle Status",
+        "curatedRSVPs": "Curated RSVPs",
+        "glamourCredits": "Glamour Credits",
+        "privilegeLevel": "Privilege Level",
+        "guestList": "Your Guest List",
+        "mediaVault": "Private Media Vault",
+        "wishlist": "Acquisition Wishlist",
+        "memberIdentity": "Member Identity",
+        "privilegeAccess": "Privilege Access",
+        "accessToken": "Access Token"
+    },
+    "concierge": {
+        "title": "Evelyn Vance",
+        "subtitle": "Inner Circle Concierge",
+        "intro": "Your time is your most precious asset. My role is to protect it while curating a life of absolute seamless luxury.",
+        "privateDialogue": "Private Dialogue",
+        "legacyInquiry": "Transmit Legacy Inquiry",
+        "activeConnection": "Active Connection",
+        "inputPlaceholder": "Enter secure message..."
+    }
+}

@@ -28,6 +28,7 @@ import DashboardPage from './pages/DashboardPage';
 import CollectionPage from './pages/CollectionPage';
 import NotFound from './pages/NotFound';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { LanguageProvider } from './context/LanguageContext';
 import { useSmoothScroll, useScrollToTop, useScrollProgress, useScrollVisibility } from './hooks/useScroll';
 
 const HomePage: React.FC = () => {
@@ -103,30 +104,32 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
 const App: React.FC = () => {
   return (
     <HelmetProvider>
-      <AuthProvider>
-        <Router>
-          <div className="min-h-screen bg-neutral-950 selection:bg-gold selection:text-black">
-            <ScrollProgress />
-            <CustomCursor />
-            <BackToTop />
-            <ChatWidget />
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/events" element={<EventsListPage />} />
-              <Route path="/collection" element={<CollectionPage />} />
-              <Route path="/access" element={<AuthPage />} />
-              <Route path="/dashboard" element={
-                <ProtectedRoute>
-                  <DashboardPage />
-                </ProtectedRoute>
-              } />
-              <Route path="/blog" element={<BlogListPage />} />
-              <Route path="/blog/:slug" element={<BlogPostPage />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </div>
-        </Router>
-      </AuthProvider>
+      <LanguageProvider>
+        <AuthProvider>
+          <Router>
+            <div className="min-h-screen bg-neutral-950 selection:bg-gold selection:text-black">
+              <ScrollProgress />
+              <CustomCursor />
+              <BackToTop />
+              <ChatWidget />
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/events" element={<EventsListPage />} />
+                <Route path="/collection" element={<CollectionPage />} />
+                <Route path="/access" element={<AuthPage />} />
+                <Route path="/dashboard" element={
+                  <ProtectedRoute>
+                    <DashboardPage />
+                  </ProtectedRoute>
+                } />
+                <Route path="/blog" element={<BlogListPage />} />
+                <Route path="/blog/:slug" element={<BlogPostPage />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </div>
+          </Router>
+        </AuthProvider>
+      </LanguageProvider>
     </HelmetProvider>
   );
 };

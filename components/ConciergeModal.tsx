@@ -1,8 +1,15 @@
 
-import React, { useState } from 'react';
-import { X, ShieldCheck, User, Globe, Star, Briefcase, ArrowRight, Send, CheckCircle } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { X, ShieldCheck, User, Globe, Star, Briefcase, ArrowRight, Send, CheckCircle, Sparkles, MessageSquare } from 'lucide-react';
 import { supabase } from '../utils/supabaseClient';
 import { sendContactEmail } from '../utils/emailService';
+import { getAIResponse } from '../utils/geminiService';
+import { useLanguage } from '../context/LanguageContext';
+
+interface ChatMessage {
+    role: "user" | "model";
+    parts: { text: string }[];
+}
 
 interface ConciergeModalProps {
     isOpen: boolean;
@@ -11,15 +18,51 @@ interface ConciergeModalProps {
 }
 
 const ConciergeModal: React.FC<ConciergeModalProps> = ({ isOpen, onClose, userEmail = '' }) => {
-    const [view, setView] = useState<'profile' | 'form' | 'success'>('profile');
+    const { t, isRTL, language } = useLanguage();
+    const [view, setView] = useState<'profile' | 'form' | 'success' | 'chat'>('profile');
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
+    const [chatInput, setChatInput] = useState('');
+    const [isAITyping, setIsAITyping] = useState(false);
+    const chatEndRef = useRef<HTMLDivElement>(null);
     const [formData, setFormData] = useState({
         name: '',
         email: userEmail,
         request: '',
     });
 
+    const scrollToBottom = () => {
+        chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
+    useEffect(() => {
+        if (view === 'chat') {
+            scrollToBottom();
+        }
+    }, [chatMessages, view]);
+
     if (!isOpen) return null;
+
+    const handleChatSend = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!chatInput.trim() || isAITyping) return;
+
+        const userMsg: ChatMessage = { role: 'user', parts: [{ text: chatInput }] };
+        const currentInput = chatInput;
+        setChatMessages(prev => [...prev, userMsg]);
+        setChatInput('');
+        setIsAITyping(true);
+
+        try {
+            const response = await getAIResponse(chatMessages, currentInput, language);
+            const aiMsg: ChatMessage = { role: 'model', parts: [{ text: response }] };
+            setChatMessages(prev => [...prev, aiMsg]);
+        } catch (error) {
+            console.error('Concierge Chat Error:', error);
+        } finally {
+            setIsAITyping(false);
+        }
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -49,7 +92,7 @@ const ConciergeModal: React.FC<ConciergeModalProps> = ({ isOpen, onClose, userEm
                 to_email: 'concierge@urbanglam.life'
             }).catch(err => console.error('EmailJS Error:', err));
 
-            // 3. Move to Success View (which shows the Auto-Responder text)
+            // 3. Move to Success View
             setView('success');
         } catch (error) {
             console.error('Error:', error);
@@ -74,8 +117,8 @@ const ConciergeModal: React.FC<ConciergeModalProps> = ({ isOpen, onClose, userEm
                     <X size={24} />
                 </button>
 
-                {/* Left Side: Cinematic Portrait (Sticky or fixed in the flex) */}
-                <div className="w-full md:w-5/12 h-1/2 md:h-full relative shrink-0">
+                {/* Left Side: Cinematic Portrait */}
+                <div className="w-full md:w-5/12 h-[40vh] md:h-full relative shrink-0">
                     <img
                         src="/images/ai_character_face_premium.jpg"
                         alt="Evelyn Vance"
@@ -88,26 +131,26 @@ const ConciergeModal: React.FC<ConciergeModalProps> = ({ isOpen, onClose, userEm
                             <span className="text-gold text-[9px] uppercase tracking-[0.5em] font-black">Identity Verified</span>
                             <ShieldCheck size={14} className="text-gold" />
                         </div>
-                        <h2 className="text-4xl md:text-6xl font-serif text-white tracking-tighter">Evelyn Vance</h2>
-                        <p className="text-white/40 text-[11px] uppercase tracking-[0.6em] font-black mt-4">Inner Circle Concierge</p>
+                        <h2 className="text-4xl md:text-6xl font-serif text-white tracking-tighter">{t('concierge.title')}</h2>
+                        <p className="text-white/40 text-[11px] uppercase tracking-[0.6em] font-black mt-4">{t('concierge.subtitle')}</p>
                     </div>
                 </div>
 
                 {/* Right Side: Dynamic Content */}
-                <div className="w-full md:w-7/12 p-8 md:p-20 overflow-y-auto bg-neutral-950/30">
+                <div className="w-full md:w-7/12 p-8 md:p-20 overflow-y-auto bg-neutral-950/30 flex flex-col">
 
                     {view === 'profile' && (
                         <div className="space-y-16 animate-in fade-in slide-in-from-right-10 duration-1000">
                             <div className="space-y-8">
                                 <h3 className="text-gold text-[10px] uppercase tracking-[0.5em] font-black">Executive Intro</h3>
-                                <p className="text-2xl md:text-4xl font-serif text-white/90 leading-tight italic font-light italic">
-                                    "Your time is your most precious asset. My role is to protect it while curating a life of absolute seamless luxury."
+                                <p className="text-2xl md:text-4xl font-serif text-white/90 leading-tight italic font-light">
+                                    "{t('concierge.intro')}"
                                 </p>
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                                 {[
-                                    { title: 'Response Time', val: '< 15 Mins', icon: <Globe size={18} /> },
+                                    { title: 'Response Time', val: 'Instant AI', icon: <Sparkles size={18} /> },
                                     { title: 'Global Access', val: 'Level IV', icon: <Star size={18} /> },
                                     { title: 'Personalized', val: 'Couture Service', icon: <User size={18} /> },
                                     { title: 'Exclusivity', val: 'Member Only', icon: <Briefcase size={18} /> }
@@ -122,17 +165,93 @@ const ConciergeModal: React.FC<ConciergeModalProps> = ({ isOpen, onClose, userEm
                                 ))}
                             </div>
 
-                            <div className="space-y-12">
+                            <div className="space-y-8">
                                 <div className="p-1 border-white/10 rounded-full bg-gradient-to-r from-gold/40 via-white/10 to-transparent">
                                     <button
-                                        onClick={() => setView('form')}
-                                        className="w-full bg-black py-8 rounded-full text-white text-[10px] uppercase tracking-[0.8em] font-black hover:bg-gold hover:text-black transition-all"
+                                        onClick={() => setView('chat')}
+                                        className="w-full bg-black py-8 rounded-full text-white text-[10px] uppercase tracking-[0.8em] font-black hover:bg-gold hover:text-black transition-all flex items-center justify-center gap-4"
                                     >
-                                        Initiate Private Dialogue
+                                        {t('concierge.privateDialogue')} <MessageSquare size={16} />
                                     </button>
                                 </div>
-                                <p className="text-center text-white/20 text-[9px] uppercase tracking-[0.3em] font-medium">Secured by Urban Glam Life Platinum encryption</p>
+                                <div className="flex justify-center">
+                                    <button
+                                        onClick={() => setView('form')}
+                                        className="text-[9px] uppercase tracking-[0.4em] font-black text-white/20 hover:text-gold transition-colors"
+                                    >
+                                        {t('concierge.legacyInquiry')}
+                                    </button>
+                                </div>
+                                <p className="text-center text-white/20 text-[9px] uppercase tracking-[0.3em] font-medium italic">Secured by Urban Glam Life Platinum encryption</p>
                             </div>
+                        </div>
+                    )}
+
+                    {view === 'chat' && (
+                        <div className="flex flex-col h-full animate-in fade-in duration-500">
+                            <div className="flex items-center justify-between mb-8 border-b border-white/10 pb-6">
+                                <div className="flex items-center gap-4">
+                                    <button
+                                        onClick={() => setView('profile')}
+                                        className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/40 hover:text-gold transition-colors"
+                                    >
+                                        <ArrowRight size={16} className="rotate-180" />
+                                    </button>
+                                    <div>
+                                        <h3 className="text-white font-serif text-2xl italic">{t('concierge.privateDialogue')}</h3>
+                                        <p className="text-gold/60 text-[9px] uppercase tracking-[0.4em] font-black italic">{t('concierge.activeConnection')}</p>
+                                    </div>
+                                </div>
+                                <Sparkles size={20} className="text-gold animate-pulse" />
+                            </div>
+
+                            <div className="flex-grow overflow-y-auto space-y-6 pr-4 mb-8 scrollbar-thin scrollbar-thumb-gold/20">
+                                {chatMessages.length === 0 && (
+                                    <div className="text-center py-20 px-10 space-y-4">
+                                        <p className="text-white/40 font-serif italic text-xl">"Welcome back, Guest."</p>
+                                        <p className="text-white/20 text-[10px] uppercase tracking-[0.4em]">How may I curate your journey today?</p>
+                                    </div>
+                                )}
+
+                                {chatMessages.map((msg, i) => (
+                                    <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                                        <div className={`max-w-[85%] p-6 rounded-[2rem] text-lg leading-relaxed ${msg.role === 'user'
+                                            ? 'bg-gold text-black font-medium rounded-tr-none'
+                                            : 'bg-neutral-900 text-neutral-300 border border-white/5 rounded-tl-none font-light italic'
+                                            }`}>
+                                            {msg.parts[0].text}
+                                        </div>
+                                    </div>
+                                ))}
+
+                                {isAITyping && (
+                                    <div className="flex justify-start">
+                                        <div className="bg-neutral-900 p-6 rounded-[2rem] rounded-tl-none border border-white/5 flex gap-2">
+                                            <div className="w-2 h-2 bg-gold/50 rounded-full animate-bounce"></div>
+                                            <div className="w-2 h-2 bg-gold/50 rounded-full animate-bounce [animation-delay:0.2s]"></div>
+                                            <div className="w-2 h-2 bg-gold/50 rounded-full animate-bounce [animation-delay:0.4s]"></div>
+                                        </div>
+                                    </div>
+                                )}
+                                <div ref={chatEndRef} />
+                            </div>
+
+                            <form onSubmit={handleChatSend} className="relative mt-auto">
+                                <input
+                                    type="text"
+                                    value={chatInput}
+                                    onChange={(e) => setChatInput(e.target.value)}
+                                    placeholder={t('concierge.inputPlaceholder')}
+                                    className="w-full bg-neutral-900 border border-white/10 rounded-full py-6 px-8 text-white focus:outline-none focus:border-gold transition-all"
+                                />
+                                <button
+                                    type="submit"
+                                    disabled={!chatInput.trim() || isAITyping}
+                                    className="absolute right-2 top-2 bottom-2 w-20 bg-gold text-black rounded-full flex items-center justify-center hover:bg-white transition-all disabled:opacity-0"
+                                >
+                                    <Send size={20} />
+                                </button>
+                            </form>
                         </div>
                     )}
 

@@ -1,12 +1,13 @@
-
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Globe } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { user } = useAuth();
+  const { language, setLanguage } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,6 +39,25 @@ const Header: React.FC = () => {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex space-x-12 items-center">
+          <div className="flex items-center gap-4 border-r border-white/10 pr-8 mr-4">
+            <Globe size={14} className="text-gold/60" />
+            <div className="flex gap-3">
+              {[
+                { code: 'en', label: 'EN' },
+                { code: 'fr', label: 'FR' },
+                { code: 'ar', label: 'AR' }
+              ].map((lang) => (
+                <button
+                  key={lang.code}
+                  onClick={() => setLanguage(lang.code as any)}
+                  className={`text-[9px] font-black tracking-widest transition-colors ${language === lang.code ? 'text-gold' : 'text-white/40 hover:text-white'}`}
+                >
+                  {lang.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
           {navLinks.map((link) => (
             <a
               key={link.name}
@@ -56,12 +76,20 @@ const Header: React.FC = () => {
         </nav>
 
         {/* Mobile Toggle */}
-        <button
-          className="md:hidden text-white p-2 hover:text-gold transition-colors"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
+        <div className="flex items-center gap-4 md:hidden">
+          <button
+            onClick={() => setLanguage(language === 'en' ? 'fr' : language === 'fr' ? 'ar' : 'en')}
+            className="text-[10px] font-black text-gold border border-gold/20 px-3 py-1 uppercase tracking-widest"
+          >
+            {language}
+          </button>
+          <button
+            className="text-white p-2 hover:text-gold transition-colors"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}

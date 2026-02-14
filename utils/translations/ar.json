@@ -1,0 +1,31 @@
+{
+    "common": {
+        "welcome": "أهلاً بك",
+        "signOut": "تسجيل الخروج",
+        "contactConcierge": "اتصل بالكونسيرج",
+        "dashboard": "لوحة تحكم VIP",
+        "loading": "جاري التحميل...",
+        "back": "رجوع"
+    },
+    "dashboard": {
+        "innerCircleStatus": "حالة الدائرة الداخلية",
+        "curatedRSVPs": "دعوات مختارة",
+        "glamourCredits": "رصيد الجاذبية",
+        "privilegeLevel": "مستوى الامتياز",
+        "guestList": "قائمة الضيوف الخاصة بك",
+        "mediaVault": "قبو الوسائط الخاص",
+        "wishlist": "قائمة المقتنيات المرغوبة",
+        "memberIdentity": "هوية العضو",
+        "privilegeAccess": "دخول متميز",
+        "accessToken": "رمز الدخول"
+    },
+    "concierge": {
+        "title": "إيفلين فانس",
+        "subtitle": "كونسيرج الدائرة الداخلية",
+        "intro": "وقتك هو أثمن أصولك. دوري هو حمايته أثناء تنسيق حياة من الفخامة المطلقة والسلسة.",
+        "privateDialogue": "حوار خاص",
+        "legacyInquiry": "إرسال استفسار تقليدي",
+        "activeConnection": "اتصال نشط",
+        "inputPlaceholder": "أدخل رسالة آمنة..."
+    }
+}

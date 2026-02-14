@@ -1,0 +1,31 @@
+{
+    "common": {
+        "welcome": "Bienvenue",
+        "signOut": "Déconnexion",
+        "contactConcierge": "Contacter la Conciergerie",
+        "dashboard": "Tableau de Bord VIP",
+        "loading": "Chargement...",
+        "back": "Retour"
+    },
+    "dashboard": {
+        "innerCircleStatus": "Statut du Cercle Intérieur",
+        "curatedRSVPs": "RSVPs Sélectionnés",
+        "glamourCredits": "Crédits de Glamour",
+        "privilegeLevel": "Niveau de Privilège",
+        "guestList": "Votre Liste d'Invités",
+        "mediaVault": "Coffre-fort Média Privé",
+        "wishlist": "Liste d'Acquisition",
+        "memberIdentity": "Identité du Membre",
+        "privilegeAccess": "Accès Privilégié",
+        "accessToken": "Jeton d'Accès"
+    },
+    "concierge": {
+        "title": "Evelyn Vance",
+        "subtitle": "Conciergerie du Cercle Intérieur",
+        "intro": "Votre temps est votre atout le plus précieux. Mon rôle est de le protéger tout en organisant une vie de luxe absolu et sans faille.",
+        "privateDialogue": "Dialogue Privé",
+        "legacyInquiry": "Transmettre une Demande Classique",
+        "activeConnection": "Connexion Active",
+        "inputPlaceholder": "Saisissez un message sécurisé..."
+    }
+}

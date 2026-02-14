@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useAuth } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
 import { supabase } from '../utils/supabaseClient';
 import { useNavigate, Link } from 'react-router-dom'; // Added Link
 import { Calendar, Star, LogOut, Heart, ArrowRight, X, ShieldCheck, User, Globe, Briefcase } from 'lucide-react';
@@ -10,6 +11,7 @@ import SEO from '../components/SEO';
 import { EventCardSkeleton, WishlistCardSkeleton } from '../components/Skeleton';
 import BrandIntro from '../components/BrandIntro';
 import ConciergeModal from '../components/ConciergeModal';
+import MagneticButton from '../components/MagneticButton';
 
 interface RSVP {
     id: string;
@@ -38,6 +40,7 @@ interface WishlistItem {
 
 const DashboardPage: React.FC = () => {
     const { user, signOut } = useAuth();
+    const { t, isRTL } = useLanguage();
     const [rsvps, setRsvps] = useState<RSVP[]>([]);
     const [wishlist, setWishlist] = useState<WishlistItem[]>([]);
     const [loading, setLoading] = useState(true);
@@ -155,29 +158,28 @@ const DashboardPage: React.FC = () => {
             <main className="flex-grow pt-24 md:pt-40 pb-20 px-4 md:px-12">
                 <div className="container mx-auto max-w-7xl">
 
-                    {/* Dashboard Header */}
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-20 gap-8 border-b border-white/5 pb-12">
                         <div>
-                            <p className="text-gold uppercase tracking-[0.4em] text-[10px] font-black mb-4">VIP Dashboard</p>
+                            <p className="text-gold uppercase tracking-[0.4em] text-[10px] font-black mb-4">{t('common.dashboard')}</p>
                             <h1 className="text-4xl md:text-7xl font-serif font-light tracking-tight text-white leading-tight">
-                                Welcome, <span className="italic text-gold/80 font-normal">{user.email?.split('@')[0]}</span>
+                                {t('common.welcome')}, <span className="italic text-gold/80 font-normal">{user.email?.split('@')[0]}</span>
                             </h1>
                         </div>
-                        <button
-                            onClick={handleSignOut}
-                            className="group flex items-center gap-4 px-8 py-3 bg-white/5 border border-white/10 hover:border-gold/30 rounded-full transition-all duration-500 hover:bg-gold/5"
-                        >
-                            <span className="text-[10px] uppercase tracking-[0.3em] font-black group-hover:text-gold transition-colors">Sign Out</span>
-                            <LogOut size={14} className="text-white/40 group-hover:text-gold transition-all group-hover:translate-x-1" />
-                        </button>
+                        <MagneticButton onClick={handleSignOut}>
+                            <div className="group flex items-center gap-4 px-8 py-3 bg-white/5 border border-white/10 hover:border-gold/30 rounded-full transition-all duration-500 hover:bg-gold/5">
+                                <span className="text-[10px] uppercase tracking-[0.3em] font-black group-hover:text-gold transition-colors">{t('common.signOut')}</span>
+                                <LogOut size={14} className={`text-white/40 group-hover:text-gold transition-all ${isRTL ? 'group-hover:-translate-x-1' : 'group-hover:translate-x-1'}`} />
+                            </div>
+                        </MagneticButton>
                     </div>
 
                     {/* Member Impact Cards */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-24 md:mb-32">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-24 md:mb-32">
                         {[
-                            { label: 'Inner Circle Status', value: 'Prime', icon: <Star size={16} /> },
-                            { label: 'Curated RSVP Credits', value: '08', icon: <Calendar size={16} /> },
-                            { label: 'Privilege Level', value: 'Platinum', icon: <Star size={16} /> }
+                            { label: t('dashboard.innerCircleStatus'), value: 'Prime', icon: <Star size={16} /> },
+                            { label: t('dashboard.curatedRSVPs'), value: rsvps.length.toString().padStart(2, '0'), icon: <Calendar size={16} /> },
+                            { label: t('dashboard.glamourCredits'), value: (rsvps.length * 125 + 500).toString(), icon: <ShieldCheck size={16} /> },
+                            { label: t('dashboard.privilegeLevel'), value: 'Platinum', icon: <Star size={16} /> }
                         ].map((stat, i) => (
                             <div key={i} className="bg-neutral-900/40 border border-white/5 p-10 rounded-3xl relative overflow-hidden group hover:border-gold/20 transition-all duration-700 hover:-translate-y-2">
                                 <div className="absolute top-6 right-6 text-gold/20 group-hover:text-gold/40 transition-colors">
@@ -204,7 +206,7 @@ const DashboardPage: React.FC = () => {
                                             <Calendar className="text-gold" size={20} />
                                         </div>
                                         <div>
-                                            <h3 className="text-3xl font-serif font-bold text-white">Your Guest List</h3>
+                                            <h3 className="text-3xl font-serif font-bold text-white">{t('dashboard.guestList')}</h3>
                                             <p className="text-white/30 text-xs uppercase tracking-widest mt-1">Confirmed & Pending Access</p>
                                         </div>
                                     </div>
@@ -274,32 +276,41 @@ const DashboardPage: React.FC = () => {
                                 )}
                             </section>
 
-                            {/* CLUB ARCHIVES SECTION */}
+                            {/* PRIVATE MEDIA VAULT SECTION */}
                             <section className="animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-400">
-                                <div className="flex items-center gap-6 mb-12">
-                                    <div className="w-14 h-14 bg-gold/10 border border-gold/20 flex items-center justify-center rounded-2xl rotate-3 group-hover:rotate-0 transition-transform">
-                                        <Star className="text-gold" size={24} />
+                                <div className="flex items-center justify-between mb-12">
+                                    <div className="flex items-center gap-6">
+                                        <div className="w-14 h-14 bg-gold/10 border border-gold/20 flex items-center justify-center rounded-2xl rotate-3 group-hover:rotate-0 transition-transform">
+                                            <Globe className="text-gold" size={24} />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-3xl md:text-4xl font-serif font-light text-white tracking-tight">{t('dashboard.mediaVault')}</h3>
+                                            <p className="text-white/20 text-[10px] uppercase tracking-[0.4em] mt-2 font-black">High-Res Editorial Downloads</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <h3 className="text-3xl md:text-4xl font-serif font-light text-white tracking-tight">The Archives</h3>
-                                        <p className="text-white/20 text-[10px] uppercase tracking-[0.4em] mt-2 font-black">Member-Only Narratives</p>
-                                    </div>
+                                    <button className="text-[9px] uppercase tracking-[0.3em] font-black text-white/40 hover:text-gold transition-colors">Access Full Archive</button>
                                 </div>
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-10">
                                     {[
-                                        { title: 'The Monaco Manifesto', category: 'LIFESTYLE', image: 'https://i.imgur.com/KPAkrhe.jpg' },
-                                        { title: 'Haute Couture Private View', category: 'FASHION', image: 'https://i.imgur.com/Bb4KgFn.jpg' }
+                                        { title: 'The Monaco Manifesto', category: '8K EDITORIAL', image: 'https://images.unsplash.com/photo-1534190239940-9ba8944ea261?auto=format&fit=crop&q=80&w=2070', size: '24.5 MB' },
+                                        { title: 'Haute Couture Private View', category: 'UNWATERMARKED', image: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&q=80&w=2070', size: '18.2 MB' }
                                     ].map((article, i) => (
                                         <div key={i} className="group relative aspect-[4/5] sm:aspect-[16/11] overflow-hidden rounded-3xl border border-white/5 hover:border-gold/40 transition-all duration-1000 cursor-pointer">
                                             <img src={article.image} alt={article.title} className="w-full h-full object-cover grayscale opacity-30 group-hover:scale-110 group-hover:opacity-60 transition-all duration-1000" />
                                             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+
+                                            <div className="absolute top-8 left-8">
+                                                <span className="inline-block bg-gold text-black text-[8px] font-black px-3 py-1 tracking-[0.3em] mb-2">{article.category}</span>
+                                                <div className="text-white/40 text-[8px] font-black uppercase tracking-widest">{article.size}</div>
+                                            </div>
+
                                             <div className="absolute bottom-10 left-10 right-10">
-                                                <span className="inline-block bg-gold text-black text-[8px] font-black px-3 py-1 mb-4 tracking-[0.3em]">{article.category}</span>
                                                 <h4 className="text-2xl md:text-3xl font-serif text-white group-hover:text-gold transition-colors leading-tight italic">{article.title}</h4>
                                             </div>
-                                            <div className="absolute top-8 right-8 w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/20 group-hover:bg-gold group-hover:text-black group-hover:border-gold transition-all duration-700 opacity-0 group-hover:opacity-100 -translate-y-4 group-hover:translate-y-0">
-                                                <ArrowRight size={20} />
+
+                                            <div className="absolute bottom-8 right-8 w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/20 group-hover:bg-gold group-hover:text-black group-hover:border-gold transition-all duration-700">
+                                                <ArrowRight size={20} className="group-hover:rotate-90 transition-transform" />
                                             </div>
                                         </div>
                                     ))}
@@ -313,7 +324,7 @@ const DashboardPage: React.FC = () => {
                                         <Heart className="text-gold" size={24} />
                                     </div>
                                     <div>
-                                        <h3 className="text-3xl md:text-4xl font-serif font-light text-white tracking-tight">Acquisition Wishlist</h3>
+                                        <h3 className="text-3xl md:text-4xl font-serif font-light text-white tracking-tight">{t('dashboard.wishlist')}</h3>
                                         <p className="text-white/20 text-[10px] uppercase tracking-[0.4em] mt-2 font-black">Curated Selections</p>
                                     </div>
                                 </div>
@@ -409,13 +420,45 @@ const DashboardPage: React.FC = () => {
                                     ))}
                                 </ul>
 
-                                <button
-                                    onClick={() => setShowConcierge(true)}
-                                    className="w-full relative overflow-hidden group/btn bg-gradient-to-br from-[#D4AF37] via-[#C5A028] to-[#8A6D3B] text-black py-8 font-black text-[11px] uppercase tracking-[0.5em] transition-all duration-300 ease-in-out hover:shadow-[0_0_40px_rgba(212,175,55,0.3)] hover:scale-[1.02] active:scale-95 shadow-2xl"
-                                >
-                                    <span className="relative z-10">Contact Concierge</span>
-                                    <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover/btn:animate-shimmer"></div>
-                                </button>
+                                <MagneticButton className="w-full" onClick={() => setShowConcierge(true)}>
+                                    <div className="w-full relative overflow-hidden group/btn bg-gradient-to-br from-[#D4AF37] via-[#C5A028] to-[#8A6D3B] text-black py-8 font-black text-[11px] uppercase tracking-[0.5em] transition-all duration-300 ease-in-out hover:shadow-[0_0_40px_rgba(212,175,55,0.3)] hover:scale-[1.02] active:scale-95 shadow-2xl flex items-center justify-center">
+                                        <span className="relative z-10">{t('common.contactConcierge')}</span>
+                                        <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover/btn:animate-shimmer"></div>
+                                    </div>
+                                </MagneticButton>
+                            </div>
+
+                            {/* Digital Membership Card */}
+                            <div className="relative aspect-[1.58/1] w-full bg-gradient-to-br from-neutral-800 to-neutral-950 rounded-[2rem] border border-white/10 p-8 overflow-hidden group hover:border-gold/30 transition-all duration-1000 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)]">
+                                {/* Magnetic Chip Placeholder */}
+                                <div className="w-12 h-10 bg-gradient-to-br from-gold/60 to-gold/20 rounded-lg mb-12 opacity-80 border border-gold/30 relative">
+                                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+                                </div>
+
+                                <div className="space-y-6 relative z-10">
+                                    <div className="flex justify-between items-start">
+                                        <div>
+                                            <p className="text-white/20 text-[8px] uppercase tracking-[0.4em] font-black mb-1">{t('dashboard.memberIdentity')}</p>
+                                            <p className="text-white font-serif text-xl italic tracking-tighter">{user.email?.split('@')[0].toUpperCase()}</p>
+                                        </div>
+                                        <div className="text-right">
+                                            <p className="text-white/20 text-[8px] uppercase tracking-[0.4em] font-black mb-1">{t('dashboard.privilegeAccess')}</p>
+                                            <p className="text-gold font-black text-[10px] tracking-[0.2em]">PLATINUM TIER</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="pt-8">
+                                        <p className="text-white/20 text-[8px] uppercase tracking-[0.4em] font-black mb-1">{t('dashboard.accessToken')}</p>
+                                        <p className="text-white/60 font-mono text-[10px] tracking-[0.5em]">UG-VIP-{user.id.substring(0, 8).toUpperCase()}</p>
+                                    </div>
+                                </div>
+
+                                {/* Decorative Background Elements */}
+                                <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_top_right,rgba(212,175,55,0.05),transparent_70%)]"></div>
+                                <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-gold/5 rounded-full blur-3xl group-hover:bg-gold/10 transition-all duration-1000"></div>
+                                <div className="absolute top-8 right-8">
+                                    <span className="text-gold/20 text-4xl font-serif italic select-none">UG</span>
+                                </div>
                             </div>
 
                             {/* Stats/Badge Area */}
