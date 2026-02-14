@@ -22,30 +22,30 @@ interface Product {
 const CURATED_PRODUCTS: Product[] = [
     {
         id: 'ali-1',
-        name: 'Oil-Wax Leather Tote',
+        name: "Oil-Wax Leather Tote",
         description: "Genuine Cowhide top-handle bag. A sophisticated messenger piece for the modern elite.",
-        price: '$85.00',
-        category: 'Accessories',
-        image_url: 'https://ae01.alicdn.com/kf/S0ff1eb226d314a72965d7eac8aae33000.jpg_800x800.jpg',
-        affiliate_url: 'https://s.click.aliexpress.com/e/_c3KjTCyR'
+        price: "$85.00",
+        category: "Accessories",
+        image_url: "https://ae01.alicdn.com/kf/S0ff1eb226d314a72965d7eac8aae33000.jpg_800x800.jpg",
+        affiliate_url: "https://s.click.aliexpress.com/e/_c3KjTCyR"
     },
     {
         id: 'ali-2',
-        name: 'KNOBSPIN Moissanite Tennis',
-        description: 'D VVS1 Moissanite set in S925 Sterling Silver. Certified 18K White Gold plating.',
-        price: '$120.00',
-        category: 'Jewelry',
-        image_url: 'https://ae01.alicdn.com/kf/S22b5a16f21db453e9e121c693bf380f0l.jpg_800x800.jpg',
-        affiliate_url: 'https://s.click.aliexpress.com/e/_c3kwBSVt'
+        name: "KNOBSPIN Moissanite Tennis",
+        description: "D VVS1 Moissanite set in S925 Sterling Silver. Certified 18K White Gold plating.",
+        price: "$120.00",
+        category: "Jewelry",
+        image_url: "https://ae01.alicdn.com/kf/S22b5a16f21db453e9e121c693bf380f0l.jpg_800x800.jpg",
+        affiliate_url: "https://s.click.aliexpress.com/e/_c3kwBSVt"
     },
     {
         id: 'ali-3',
-        name: 'Office Couture Blazer',
-        description: 'Korean-inspired sharp tailoring for the high-performing professional.',
-        price: '$75.00',
-        category: 'Apparel',
-        image_url: 'https://ae01.alicdn.com/kf/S6e02a5c4e0484032a6283890332abeeeo.jpg_800x800.jpg',
-        affiliate_url: 'https://s.click.aliexpress.com/e/_c2xqYI3l'
+        name: "Office Couture Blazer",
+        description: "Korean-inspired sharp tailoring for the high-performing professional.",
+        price: "$75.00",
+        category: "Apparel",
+        image_url: "https://ae01.alicdn.com/kf/S6e02a5c4e0484032a6283890332abeeeo.jpg_800x800.jpg",
+        affiliate_url: "https://s.click.aliexpress.com/e/_c2xqYI3l"
     },
     {
         id: 'ali-4',
@@ -54,7 +54,7 @@ const CURATED_PRODUCTS: Product[] = [
         price: '$185.00',
         category: 'Travel',
         image_url: 'https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?q=80&w=800',
-        affiliate_url: 'https://www.aliexpress.com/w/wholesale-affiliate-program.html'
+        affiliate_url: 'https://s.click.aliexpress.com/e/_c3KjTCyR'
     },
     {
         id: 'ali-5',
@@ -63,7 +63,7 @@ const CURATED_PRODUCTS: Product[] = [
         price: '$24.00',
         category: 'Jewelry',
         image_url: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=800',
-        affiliate_url: 'https://www.aliexpress.com/w/wholesale-affiliate-program.html'
+        affiliate_url: 'https://s.click.aliexpress.com/e/_c3kwBSVt'
     },
     {
         id: 'ali-6',
@@ -72,7 +72,7 @@ const CURATED_PRODUCTS: Product[] = [
         price: '$38.00',
         category: 'Accessories',
         image_url: 'https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?q=80&w=800',
-        affiliate_url: 'https://www.aliexpress.com/w/wholesale-affiliate-program.html'
+        affiliate_url: 'https://s.click.aliexpress.com/e/_c3KjTCyR'
     },
     {
         id: 'ali-7',
@@ -81,7 +81,7 @@ const CURATED_PRODUCTS: Product[] = [
         price: '$155.00',
         category: 'Apparel',
         image_url: 'https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800',
-        affiliate_url: 'https://www.aliexpress.com/w/wholesale-affiliate-program.html'
+        affiliate_url: 'https://s.click.aliexpress.com/e/_c2xqYI3l'
     },
     {
         id: 'ali-8',
@@ -90,7 +90,7 @@ const CURATED_PRODUCTS: Product[] = [
         price: '$72.00',
         category: 'Accessories',
         image_url: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=800',
-        affiliate_url: 'https://www.aliexpress.com/w/wholesale-affiliate-program.html'
+        affiliate_url: 'https://s.click.aliexpress.com/e/_c3KjTCyR'
     }
 ];
 
@@ -251,42 +251,53 @@ const CollectionPage: React.FC = () => {
                                     className="group relative bg-neutral-900/40 rounded-sm overflow-hidden border border-white/5 hover:border-gold/30 transition-all duration-700 animate-in fade-in slide-in-from-bottom"
                                     style={{ animationDelay: `${index * 100}ms` }}
                                 >
-                                    {/* Image Container */}
-                                    <div className="relative aspect-[4/5] overflow-hidden">
-                                        <img
-                                            src={product.image_url}
-                                            alt={product.name}
-                                            loading="lazy"
-                                            className="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-110"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
-
-                                        {/* Wishlist Button */}
-                                        <button
-                                            onClick={(e) => toggleWishlist(product.id, e)}
-                                            className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center text-white hover:bg-gold hover:text-black transition-all duration-300"
-                                        >
-                                            <Heart
-                                                size={18}
-                                                className={wishlist.includes(product.id) ? "fill-current text-red-500" : ""}
-                                                strokeWidth={wishlist.includes(product.id) ? 0 : 2}
+                                    {/* Link wrapper for the whole card top */}
+                                    <a
+                                        href={product.affiliate_url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="block relative"
+                                    >
+                                        {/* Image Container */}
+                                        <div className="relative aspect-[4/5] overflow-hidden">
+                                            <img
+                                                src={product.image_url}
+                                                alt={product.name}
+                                                loading="lazy"
+                                                className="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-110"
                                             />
-                                            {/* Show transparent fill if not active, or implement toggle logic UI properly */}
-                                            {/* Actually, if active: fill-current text-gold (or red). If not: stroke-current text-white. */}
-                                        </button>
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
 
-                                        {/* Tag */}
-                                        <div className="absolute top-4 left-4 bg-gold/90 text-black text-[10px] font-black px-3 py-1 uppercase tracking-widest">
-                                            {product.category}
+                                            {/* Tag */}
+                                            <div className="absolute top-4 left-4 bg-gold/90 text-black text-[10px] font-black px-3 py-1 uppercase tracking-widest">
+                                                {product.category}
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
+
+                                    {/* Wishlist Button - Separated from link wrapper */}
+                                    <button
+                                        onClick={(e) => toggleWishlist(product.id, e)}
+                                        className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center text-white hover:bg-gold hover:text-black transition-all duration-300"
+                                    >
+                                        <Heart
+                                            size={18}
+                                            className={wishlist.includes(product.id) ? "fill-current text-red-500" : ""}
+                                            strokeWidth={wishlist.includes(product.id) ? 0 : 2}
+                                        />
+                                    </button>
 
                                     {/* Content */}
                                     <div className="p-8 relative">
-                                        <div className="mb-4">
+                                        <a
+                                            href={product.affiliate_url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="block mb-4"
+                                        >
                                             <h3 className="text-2xl font-serif text-white mb-2 group-hover:text-gold transition-colors duration-500">{product.name}</h3>
                                             <p className="text-neutral-400 text-sm line-clamp-2 font-light">{product.description}</p>
-                                        </div>
+                                        </a>
 
                                         <div className="flex items-center justify-between pt-6 border-t border-white/10">
                                             <span className="text-xl font-light text-white">{product.price}</span>
