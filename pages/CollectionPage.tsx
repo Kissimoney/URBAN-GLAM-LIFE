@@ -253,8 +253,16 @@ const CollectionPage: React.FC = () => {
                                 >
                                     {/* Link wrapper for the whole card top */}
                                     <button
-                                        onClick={() => navigate(`/product/${product.id}`)}
-                                        className="block relative w-full text-left"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            try {
+                                                navigate(`/product/${product.id}`);
+                                            } catch (error) {
+                                                console.error('Navigation error:', error);
+                                            }
+                                        }}
+                                        className="block relative w-full text-left cursor-pointer"
                                     >
                                         {/* Image Container */}
                                         <div className="relative aspect-[4/5] overflow-hidden">
@@ -288,8 +296,16 @@ const CollectionPage: React.FC = () => {
                                     {/* Content */}
                                     <div className="p-8 relative">
                                         <button
-                                            onClick={() => navigate(`/product/${product.id}`)}
-                                            className="block mb-4 w-full text-left"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                try {
+                                                    navigate(`/product/${product.id}`);
+                                                } catch (error) {
+                                                    console.error('Navigation error:', error);
+                                                }
+                                            }}
+                                            className="block mb-4 w-full text-left cursor-pointer"
                                         >
                                             <h3 className="text-2xl font-serif text-white mb-2 group-hover:text-gold transition-colors duration-500">{product.name}</h3>
                                             <p className="text-neutral-400 text-sm line-clamp-2 font-light">{product.description}</p>
@@ -298,8 +314,16 @@ const CollectionPage: React.FC = () => {
                                         <div className="flex items-center justify-between pt-6 border-t border-white/10">
                                             <span className="text-xl font-light text-white">{product.price}</span>
                                             <button
-                                                onClick={() => navigate(`/product/${product.id}`)}
-                                                className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-gold hover:text-white transition-colors"
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
+                                                    try {
+                                                        navigate(`/product/${product.id}`);
+                                                    } catch (error) {
+                                                        console.error('Navigation error:', error);
+                                                    }
+                                                }}
+                                                className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-gold hover:text-white transition-colors cursor-pointer"
                                             >
                                                 {product.affiliate_url ? 'Secure Access' : 'Inquire'} <ArrowRight size={14} />
                                             </button>
