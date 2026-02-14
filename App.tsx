@@ -26,6 +26,7 @@ import EventsPage from './pages/EventsPage';
 import AuthPage from './pages/AuthPage';
 import DashboardPage from './pages/DashboardPage';
 import CollectionPage from './pages/CollectionPage';
+import ProductPage from './pages/ProductPage';
 import NotFound from './pages/NotFound';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { LanguageProvider } from './context/LanguageContext';
@@ -124,6 +125,7 @@ const App: React.FC = () => {
                 } />
                 <Route path="/blog" element={<BlogListPage />} />
                 <Route path="/blog/:slug" element={<BlogPostPage />} />
+                <Route path="/product/:id" element={<ProductPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>

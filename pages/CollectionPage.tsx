@@ -252,11 +252,9 @@ const CollectionPage: React.FC = () => {
                                     style={{ animationDelay: `${index * 100}ms` }}
                                 >
                                     {/* Link wrapper for the whole card top */}
-                                    <a
-                                        href={product.affiliate_url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="block relative"
+                                    <button
+                                        onClick={() => navigate(`/product/${product.id}`)}
+                                        className="block relative w-full text-left"
                                     >
                                         {/* Image Container */}
                                         <div className="relative aspect-[4/5] overflow-hidden">
@@ -273,7 +271,7 @@ const CollectionPage: React.FC = () => {
                                                 {product.category}
                                             </div>
                                         </div>
-                                    </a>
+                                    </button>
 
                                     {/* Wishlist Button - Separated from link wrapper */}
                                     <button
@@ -289,34 +287,22 @@ const CollectionPage: React.FC = () => {
 
                                     {/* Content */}
                                     <div className="p-8 relative">
-                                        <a
-                                            href={product.affiliate_url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="block mb-4"
+                                        <button
+                                            onClick={() => navigate(`/product/${product.id}`)}
+                                            className="block mb-4 w-full text-left"
                                         >
                                             <h3 className="text-2xl font-serif text-white mb-2 group-hover:text-gold transition-colors duration-500">{product.name}</h3>
                                             <p className="text-neutral-400 text-sm line-clamp-2 font-light">{product.description}</p>
-                                        </a>
+                                        </button>
 
                                         <div className="flex items-center justify-between pt-6 border-t border-white/10">
                                             <span className="text-xl font-light text-white">{product.price}</span>
-                                            {product.affiliate_url ? (
-                                                <a
-                                                    href={product.affiliate_url}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-gold hover:text-white transition-colors"
-                                                >
-                                                    Secure Access <ArrowRight size={14} />
-                                                </a>
-                                            ) : (
-                                                <button
-                                                    className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-gold hover:text-white transition-colors"
-                                                >
-                                                    Inquire <ArrowRight size={14} />
-                                                </button>
-                                            )}
+                                            <button
+                                                onClick={() => navigate(`/product/${product.id}`)}
+                                                className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-gold hover:text-white transition-colors"
+                                            >
+                                                {product.affiliate_url ? 'Secure Access' : 'Inquire'} <ArrowRight size={14} />
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
