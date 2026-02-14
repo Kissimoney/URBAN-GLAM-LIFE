@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { ArrowRight, ShoppingBag, Filter, Heart } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import { ProductCardSkeleton } from '../components/Skeleton';
 
@@ -252,16 +252,8 @@ const CollectionPage: React.FC = () => {
                                     style={{ animationDelay: `${index * 100}ms` }}
                                 >
                                     {/* Link wrapper for the whole card top */}
-                                    <button
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            e.stopPropagation();
-                                            try {
-                                                navigate(`/product/${product.id}`);
-                                            } catch (error) {
-                                                console.error('Navigation error:', error);
-                                            }
-                                        }}
+                                    <Link
+                                        to={`/product/${product.id}`}
                                         className="block relative w-full text-left cursor-pointer"
                                     >
                                         {/* Image Container */}
@@ -279,7 +271,7 @@ const CollectionPage: React.FC = () => {
                                                 {product.category}
                                             </div>
                                         </div>
-                                    </button>
+                                    </Link>
 
                                     {/* Wishlist Button - Separated from link wrapper */}
                                     <button
@@ -295,38 +287,22 @@ const CollectionPage: React.FC = () => {
 
                                     {/* Content */}
                                     <div className="p-8 relative">
-                                        <button
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                e.stopPropagation();
-                                                try {
-                                                    navigate(`/product/${product.id}`);
-                                                } catch (error) {
-                                                    console.error('Navigation error:', error);
-                                                }
-                                            }}
-                                            className="block mb-4 w-full text-left cursor-pointer"
+                                        <Link
+                                            to={`/product/${product.id}`}
+                                            className="block mb-4 w-full text-left"
                                         >
                                             <h3 className="text-2xl font-serif text-white mb-2 group-hover:text-gold transition-colors duration-500">{product.name}</h3>
                                             <p className="text-neutral-400 text-sm line-clamp-2 font-light">{product.description}</p>
-                                        </button>
+                                        </Link>
 
                                         <div className="flex items-center justify-between pt-6 border-t border-white/10">
                                             <span className="text-xl font-light text-white">{product.price}</span>
-                                            <button
-                                                onClick={(e) => {
-                                                    e.preventDefault();
-                                                    e.stopPropagation();
-                                                    try {
-                                                        navigate(`/product/${product.id}`);
-                                                    } catch (error) {
-                                                        console.error('Navigation error:', error);
-                                                    }
-                                                }}
+                                            <Link
+                                                to={`/product/${product.id}`}
                                                 className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-gold hover:text-white transition-colors cursor-pointer"
                                             >
                                                 {product.affiliate_url ? 'Secure Access' : 'Inquire'} <ArrowRight size={14} />
-                                            </button>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
