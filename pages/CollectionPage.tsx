@@ -16,7 +16,83 @@ interface Product {
     price: string;
     category: string;
     image_url: string;
+    affiliate_url?: string;
 }
+
+const CURATED_PRODUCTS: Product[] = [
+    {
+        id: 'ali-1',
+        name: 'Midnight Quilted Crossbody',
+        description: 'High-quality sheepskin with gold-tone hardware and iconic quilting.',
+        price: '$58.00',
+        category: 'Accessories',
+        image_url: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=800',
+        affiliate_url: 'https://www.aliexpress.com/w/wholesale-affiliate-program.html'
+    },
+    {
+        id: 'ali-2',
+        name: 'Moissanite Aura Bracelet',
+        description: 'D-Color Moissanite stones with VVS1 clarity in 925 sterling silver.',
+        price: '$89.00',
+        category: 'Jewelry',
+        image_url: 'https://images.unsplash.com/photo-1515562141207-7a18b5ce01c4?q=80&w=800',
+        affiliate_url: 'https://www.aliexpress.com/w/wholesale-affiliate-program.html'
+    },
+    {
+        id: 'ali-3',
+        name: 'The Executive Blazer',
+        description: 'Double-breasted wool blend with structured shoulders and royal buttons.',
+        price: '$65.00',
+        category: 'Apparel',
+        image_url: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=800',
+        affiliate_url: 'https://www.aliexpress.com/w/wholesale-affiliate-program.html'
+    },
+    {
+        id: 'ali-4',
+        name: 'Aero-Magnesium Carry-on',
+        description: 'Full aluminum-alloy hardshell with TSA locks and silent glide wheels.',
+        price: '$185.00',
+        category: 'Travel',
+        image_url: 'https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?q=80&w=800',
+        affiliate_url: 'https://www.aliexpress.com/w/wholesale-affiliate-program.html'
+    },
+    {
+        id: 'ali-5',
+        name: 'Herringbone Essence Necklace',
+        description: '18k gold-pressed stainless steel, PVD coated for water resistance.',
+        price: '$24.00',
+        category: 'Jewelry',
+        image_url: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=800',
+        affiliate_url: 'https://www.aliexpress.com/w/wholesale-affiliate-program.html'
+    },
+    {
+        id: 'ali-6',
+        name: 'Editorial Mulberry Silk Scarf',
+        description: '100% genuine silk with hand-rolled edges and high-fashion prints.',
+        price: '$38.00',
+        category: 'Accessories',
+        image_url: 'https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?q=80&w=800',
+        affiliate_url: 'https://www.aliexpress.com/w/wholesale-affiliate-program.html'
+    },
+    {
+        id: 'ali-7',
+        name: 'The Sovereign Long Trench',
+        description: 'Floor-length cashmere-wool blend in a refined camel tone.',
+        price: '$155.00',
+        category: 'Apparel',
+        image_url: 'https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800',
+        affiliate_url: 'https://www.aliexpress.com/w/wholesale-affiliate-program.html'
+    },
+    {
+        id: 'ali-8',
+        name: 'Signature Gold-Detail Pumps',
+        description: 'Genuine leather with bespoke hardware and custom stiletto profile.',
+        price: '$72.00',
+        category: 'Accessories',
+        image_url: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=800',
+        affiliate_url: 'https://www.aliexpress.com/w/wholesale-affiliate-program.html'
+    }
+];
 
 const CollectionPage: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -46,10 +122,18 @@ const CollectionPage: React.FC = () => {
                 .select('*')
                 .order('name');
 
-            if (error) throw error;
-            setProducts(data || []);
+            if (error) {
+                console.warn('Supabase fetch failed, using curated fallback:', error);
+                setProducts(CURATED_PRODUCTS);
+            } else {
+                // Merge database products with curated items if needed, or just use curated
+                // For now, we prefer showing the curated items first
+                const dbProducts = data || [];
+                setProducts([...CURATED_PRODUCTS, ...dbProducts]);
+            }
         } catch (error) {
             console.error('Error fetching products:', error);
+            setProducts(CURATED_PRODUCTS);
         } finally {
             setLoading(false);
         }
@@ -206,11 +290,22 @@ const CollectionPage: React.FC = () => {
 
                                         <div className="flex items-center justify-between pt-6 border-t border-white/10">
                                             <span className="text-xl font-light text-white">{product.price}</span>
-                                            <button
-                                                className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-gold hover:text-white transition-colors"
-                                            >
-                                                Inquire <ArrowRight size={14} />
-                                            </button>
+                                            {product.affiliate_url ? (
+                                                <a
+                                                    href={product.affiliate_url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-gold hover:text-white transition-colors"
+                                                >
+                                                    Secure Access <ArrowRight size={14} />
+                                                </a>
+                                            ) : (
+                                                <button
+                                                    className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-gold hover:text-white transition-colors"
+                                                >
+                                                    Inquire <ArrowRight size={14} />
+                                                </button>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
